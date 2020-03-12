@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-button>
+        <b-button @click="onSubmit">
           <b-img v-bind:src="oauth_logo_img" rounded alt="Rounded image"></b-img>
           {{ oauth_msg }} 로 간편로그인 하기
         </b-button>
@@ -18,6 +18,11 @@ export default {
   name: 'LoginButton',
   props: {
     oauth_msg: null,
+  },
+  methods: {
+    onSubmit() {
+      this.$router.push('./login');
+    },
   },
 };
 </script>
