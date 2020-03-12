@@ -2,7 +2,7 @@
     <div>
         <b-button>
           <b-img v-bind:src="oauth_logo_img" rounded alt="Rounded image"></b-img>
-          kakao 로 간편로그인 하기
+          {{ oauth_msg }} 로 간편로그인 하기
         </b-button>
     </div>
 </template>
@@ -17,6 +17,7 @@ export default {
   },
   name: 'LoginButton',
   props: {
+    oauth_msg: null,
   },
 };
 </script>

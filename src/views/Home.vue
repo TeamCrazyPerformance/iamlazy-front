@@ -6,9 +6,9 @@
     <p>if you think you are lazy, Try to use this app.</p>
   </div>
   <div id="loginList">
-    <LoginButton></LoginButton><br>
-    <LoginButton></LoginButton><br>
-    <LoginButton></LoginButton><br>
+    <LoginButton oauth_msg="kakao"></LoginButton><br>
+    <LoginButton oauth_msg="naver"></LoginButton><br>
+    <LoginButton oauth_msg="google"></LoginButton><br>
   </div>
 </div>
 </template>
@@ -27,3 +27,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#logo {
+  padding-bottom: 60px;
+}
+</style>
