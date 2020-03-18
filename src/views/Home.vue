@@ -1,15 +1,9 @@
 <template>
 <div id="home">
-  <div id="logo">
-    <h1>"I am Lazy"</h1>
-    <br>
-    <p>if you think you are lazy, Try to use this app.</p>
+  <div id = "logo">
+    <img id="logoImg" src="../../public/logo.png"/>
   </div>
-  <div id="loginList">
-    <LoginButton oauth_msg="kakao"></LoginButton><br>
-    <LoginButton oauth_msg="naver"></LoginButton><br>
-    <LoginButton oauth_msg="google"></LoginButton><br>
-  </div>
+  <LoginButton></LoginButton>
 </div>
 </template>
 
@@ -17,10 +11,6 @@
 import LoginButton from '@/components/LoginButton.vue';
 
 export default {
-  data() {
-    return {
-    };
-  },
   name: 'Home',
   components: {
     LoginButton,
@@ -28,8 +18,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+#home {
+  width: 100%;
+  height: 100%;
+}
 #logo {
-  padding-bottom: 60px;
+  width: 100%;
+  height: 60%;
+}
+#logoImg {
+  width: 100%;
+  margin-top: 40%;
 }
 </style>

@@ -12,6 +12,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 100px;
+  max-width: 360px;
+  height: 640px;
+  border: black 1px solid;
+  margin: 0 auto;
 }
 </style>
