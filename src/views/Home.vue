@@ -3,17 +3,17 @@
   <div id = "logo">
     <img id="logoImg" src="../../public/logo.png"/>
   </div>
-  <LoginButton></LoginButton>
+  <Login></Login>
 </div>
 </template>
 
 <script>
-import LoginButton from '@/components/LoginButton.vue';
+import Login from '../components/Login.vue';
 
 export default {
   name: 'Home',
   components: {
-    LoginButton,
+    Login,
   },
 };
 </script>
