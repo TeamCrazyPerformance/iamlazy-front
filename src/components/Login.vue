@@ -21,6 +21,7 @@ export default {
           alert('로그인에 실패했습니다.');
         }
       });
+      this.$router.push('calendar');
     }
   },
 };
