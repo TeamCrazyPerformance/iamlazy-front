@@ -2,8 +2,8 @@
     <div id='week'>
         <div id='weekList'>
             <ul>
-              <li v-for='item in items' :key='item.id'>
-                <WeekListItem :item='item'></weekListItem>
+              <li v-for='weekListItem in weekListItems' :key='weekListItem.id'>
+                <WeekListItem :weekListItem='weekListItem'></weekListItem>
               </li>
             </ul>
         </div>
@@ -17,7 +17,7 @@ export default {
   name: 'Week',
   data() {
     return {
-      items: [
+      weekListItems: [
         {
           id: 1,
           day: '월',
