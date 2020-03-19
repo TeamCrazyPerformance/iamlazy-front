@@ -1,9 +1,9 @@
 <template>
-    <div id='week'>
-        <div id='weekList'>
+    <div id='weekCalendar'>
+        <div id='dayList'>
             <ul>
-              <li v-for='weekListItem in weekListItems' :key='weekListItem.id'>
-                <WeekListItem :weekListItem='weekListItem'></weekListItem>
+              <li v-for='dayListItem in dayListItems' :key='dayListItem.id'>
+                <DayListItem :dayListItem='dayListItem'></DayListItem>
               </li>
             </ul>
         </div>
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import WeekListItem from './WeekListItem.vue';
+import DayListItem from './DayListItem.vue';
 
 export default {
-  name: 'Week',
+  name: 'WeekCalendar',
   data() {
     return {
-      weekListItems: [
+      dayListItems: [
         {
           id: 1,
           day: '월',
@@ -70,7 +70,7 @@ export default {
     };
   },
   components: {
-    WeekListItem,
+    DayListItem,
   },
 };
 

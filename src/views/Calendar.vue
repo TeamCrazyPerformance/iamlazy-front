@@ -1,28 +1,28 @@
 <template>
     <div id = 'calendar'>
         <div id='flag_info'>
-          <input type="radio" value="week" v-model="flag" checked>
+          <input type="radio" value="week" v-model="weekOrMonthShow" checked>
           <label for="week">주</label>
-          <input type="radio" value="month" v-model="flag">
+          <input type="radio" value="month" v-model="weekOrMonthShow">
           <label for="month">월</label>
         </div>
-          <Week v-if="flag=='week'">
-          </Week>
+          <WeekCalendar v-show="weekOrMonthShow=='week'">
+          </WeekCalendar>
     </div>
 </template>
 
 <script>
-import Week from '../components/Week.vue';
+import WeekCalendar from '../components/weekCalendar/WeekCalendar.vue';
 
 export default {
   name: 'Calendar',
   data() {
     return {
-      flag: 'week',
+      weekOrMonthShow: 'week',
     };
   },
   components: {
-    Week,
+    WeekCalendar,
   },
 };
 </script>

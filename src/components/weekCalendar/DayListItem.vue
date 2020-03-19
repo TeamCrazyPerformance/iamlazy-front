@@ -1,8 +1,8 @@
 <template>
-    <div id="weekListItem" v-on:click="todoListShow=!todoListShow">
-      <div id="date">
-        <p>{{weekListItem.day}} {{weekListItem.date}}</p>
-        <p>{{weekListItem.review}}</p>
+    <div id="dayListItem">
+      <div id="day" @click="todoListShow=!todoListShow">
+        <p>{{dayListItem.day}} {{dayListItem.date}}</p>
+        <p>{{dayListItem.review}}</p>
       </div>
       <div id="todoList" v-show="todoListShow">
         <ul>
@@ -18,9 +18,9 @@
 import TodoListItem from './TodoListItem.vue';
 
 export default {
-  name: 'WeekListItem',
+  name: 'DayListItem',
   props: [
-    'weekListItem',
+    'dayListItem',
   ],
   data() {
     return {
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style>
-#weekListItem {
+#dayListItem {
   width: 100%;
   height: 20%;
   text-align: left;
