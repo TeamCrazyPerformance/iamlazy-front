@@ -4,7 +4,8 @@
       <DayListItem
         v-for="i in 7"
         :key="i"
-        :day-list-item-id="getCurrentDay(getFirstDay(),i-1)" />
+        :day-list-item-id="getDayFromFirstDayToIdx(i-1)"
+      />
     </div>
   </div>
 </template>
@@ -17,17 +18,22 @@ export default {
   components: {
     DayListItem,
   },
-  methods: {
-    getCurrentDay(firstDay, idx) {
-      const currentDay = firstDay;
-      currentDay.setDate(firstDay.getDate() + idx);
-      return currentDay;
+  computed: {
+    today() {
+      return new Date();
     },
-    getFirstDay() {
-      const today = new Date();
-      const firstDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    firstDay() {
+      const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(),
+        this.today.getDate());
       firstDay.setDate(firstDay.getDate() - firstDay.getDay());
       return firstDay;
+    },
+  },
+  methods: {
+    getDayFromFirstDayToIdx(idx) {
+      const currentDay = new Date(this.firstDay);
+      currentDay.setDate(this.firstDay.getDate() + idx);
+      return currentDay;
     },
   },
 };

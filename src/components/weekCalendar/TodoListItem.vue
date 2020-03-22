@@ -2,7 +2,7 @@
   <div id="todoListItem">
     <input
       type="checkbox"
-      v-model="complete"
+      v-model="finish"
     >
     <span>{{ content }}</span>
   </div>
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       content: '할일',
-      complete: false,
+      finish: false,
     };
   },
 };

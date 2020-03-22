@@ -4,8 +4,7 @@
       id="day"
       @click="todoListShow=!todoListShow"
     >
-      <span>{{ dayListItemId.getFullYear() }} - {{ dayListItemId.getMonth()+1 }} -
-        {{ dayListItemId.getDate() }}</span>
+      <span>{{ formatedDate }}</span>
       <br>
       <span>{{ review }}</span>
     </div>
@@ -33,9 +32,14 @@ export default {
   data() {
     return {
       review: '회고를 입력해주세요',
-      todoListShow: false,
       todoListItemsId: [1, 2, 3],
+      todoListShow: false,
     };
+  },
+  computed: {
+    formatedDate() {
+      return this.dayListItemId.toISOString().split('T')[0];
+    },
   },
   components: {
     TodoListItem,
