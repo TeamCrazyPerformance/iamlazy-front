@@ -12,7 +12,7 @@
 const kakaoAPI ='95883d28e87701fe86b707e0b9fc768a';
 
 export default {
-  name: 'Login',
+  name: 'KakaoLoginButton',
   methods: {
     loginWithKakao() {
       Kakao.init(kakaoAPI);

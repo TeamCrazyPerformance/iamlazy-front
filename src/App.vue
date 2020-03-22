@@ -5,13 +5,13 @@
 </template>
 
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 360px;
-  height: 640px;
+  max-width: 506px;
+  height: 900px;
   border: black 1px solid;
   margin: 0 auto;
 }

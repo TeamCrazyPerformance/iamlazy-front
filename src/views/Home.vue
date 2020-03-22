@@ -6,25 +6,26 @@
         src="../../public/logo.png"
       >
     </div>
-    <Login />
+    <kakao-login-button />
   </div>
 </template>
 
 <script>
-import Login from '../components/Login.vue';
+import KakaoLoginButton from '../components/KakaoLoginButton.vue';
 
 export default {
   name: 'Home',
   components: {
-    Login,
+    KakaoLoginButton,
   },
 };
 </script>
 
-<style>
+<style scoped>
 #home {
   width: 100%;
   height: 100%;
+  text-align: center;
 }
 #logo {
   width: 100%;
