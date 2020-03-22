@@ -1,12 +1,17 @@
 <template>
   <div id="dayListItem">
-    <span>{{ dayListItemId.getDate() }}</span>
-    <span>{{ review }}</span>
-    <TodoListItem
-      v-for="todoListItemId in todoListItemsId"
-      :key="todoListItemId"
-      :todo-list-item-id="todoListItemId"
-    />
+    <span>{{ date }}</span>
+    <span v-if="active">{{ review }}</span>
+    <div
+      id="todoList"
+      v-if="active"
+    >
+      <TodoListItem
+        v-for="todoListItemId in todoListItemsId"
+        :key="todoListItemId"
+        :todo-list-item-id="todoListItemId"
+      />
+    </div>
   </div>
 </template>
 
@@ -21,12 +26,22 @@ export default {
   data() {
     return {
       review: ' :)',
-      todoListShow: false,
       todoListItemsId: [1, 2],
     };
   },
   components: {
     TodoListItem,
+  },
+  computed: {
+    today() {
+      return new Date();
+    },
+    date() {
+      return this.dayListItemId.getDate();
+    },
+    active() {
+      return this.today.getMonth() === this.dayListItemId.getMonth();
+    },
   },
 };
 </script>

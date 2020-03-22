@@ -1,6 +1,8 @@
 <template>
   <div id="monthCalendar">
-    <p id="month">{{ new Date().getMonth()+1 }} 월</p>
+    <p id="month">
+      {{ month }} 월
+    </p>
     <table id="monthTable">
       <tr>
         <td
@@ -19,7 +21,7 @@
           v-for="j in 7"
           :key="j"
         >
-          <DayListItem :day-list-item-id="getCurrentDay(getFirstDay(),j-1+7*(i-1))" />
+          <DayListItem :day-list-item-id="getDayFromFirstDayToIdx(j-1+7*(i-1))" />
         </td>
       </tr>
     </table>
@@ -31,16 +33,23 @@ import DayListItem from './DayListItem.vue';
 
 export default {
   name: 'MonthCalendar',
-  methods: {
-    getFirstDay() {
-      const today = new Date();
-      const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+  computed: {
+    today() {
+      return new Date();
+    },
+    month() {
+      return this.today.getMonth() + 1;
+    },
+    firstDayInMonth() {
+      const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
       firstDay.setDate(firstDay.getDate() - firstDay.getDay());
       return firstDay;
     },
-    getCurrentDay(firstDay, idx) {
-      const currentDay = firstDay;
-      currentDay.setDate(firstDay.getDate() + idx);
+  },
+  methods: {
+    getDayFromFirstDayToIdx(idx) {
+      const currentDay = new Date(this.firstDayInMonth);
+      currentDay.setDate(this.firstDayInMonth.getDate() + idx);
       return currentDay;
     },
   },
