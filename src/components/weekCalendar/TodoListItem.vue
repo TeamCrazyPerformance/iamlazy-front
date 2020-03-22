@@ -1,15 +1,30 @@
 <template>
-    <div id="TodoListItem">
-        <span>{{todoListItem.content}}</span>
-        <input type="checkbox" v-model="todoListItem.complete"/>
-    </div>
+  <div id="todoListItem">
+    <input
+      type="checkbox"
+      v-model="complete"
+    >
+    <span>{{ content }}</span>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'TodoListItem',
-  props: [
-    'todoListItem',
-  ],
+  props: {
+    todoListItemId: Number(0),
+  },
+  data() {
+    return {
+      content: '할일',
+      complete: false,
+    };
+  },
 };
 </script>
+
+<style scoped>
+#todoListItem {
+  background-color: whitesmoke;
+}
+</style>
