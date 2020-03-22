@@ -1,6 +1,9 @@
 <template>
-  <img id="loginImg" src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
-  v-on:click="loginWithKakao()"/>
+  <img
+    id="loginImg"
+    src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
+    @click="loginWithKakao()"
+  >
 </template>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>

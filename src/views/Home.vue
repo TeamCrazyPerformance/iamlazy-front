@@ -1,10 +1,13 @@
 <template>
-<div id="home">
-  <div id = "logo">
-    <img id="logoImg" src="../../public/logo.png"/>
+  <div id="home">
+    <div id="logo">
+      <img
+        id="logoImg"
+        src="../../public/logo.png"
+      >
+    </div>
+    <Login />
   </div>
-  <Login></Login>
-</div>
 </template>
 
 <script>
