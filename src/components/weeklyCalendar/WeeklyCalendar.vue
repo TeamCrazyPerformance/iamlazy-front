@@ -2,9 +2,9 @@
   <div id="weeklyCalendar">
     <div id="dayList">
       <WeeklyDayListItem
-        v-for="i in 7"
-        :key="i"
-        :day-list-item-id="getDayFromFirstDayToIdx(i-1)"
+        v-for="(dayInWeek,idx) in daysInWeek"
+        :key="idx"
+        :day-list-item-id="dayInWeek"
       />
     </div>
   </div>
@@ -22,18 +22,16 @@ export default {
     today() {
       return new Date();
     },
-    firstDay() {
+    firstDayInWeek() {
       const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(),
         this.today.getDate());
       firstDay.setDate(firstDay.getDate() - firstDay.getDay());
       return firstDay;
     },
-  },
-  methods: {
-    getDayFromFirstDayToIdx(idx) {
-      const currentDay = new Date(this.firstDay);
-      currentDay.setDate(this.firstDay.getDate() + idx);
-      return currentDay;
+    daysInWeek() {
+      const days = [...Array(7).keys()].map((x) => new Date(this.firstDayInWeek.getFullYear(),
+        this.firstDayInWeek.getMonth(), this.firstDayInWeek.getDate() + x));
+      return days;
     },
   },
 };
