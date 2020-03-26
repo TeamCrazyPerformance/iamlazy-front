@@ -1,5 +1,5 @@
 <template>
-  <div id="todoListItem">
+  <div id="weeklyTodoListItem">
     <input
       type="checkbox"
       v-model="finish"
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'TodoListItem',
+  name: 'WeeklyTodoListItem',
   props: {
     todoListItemId: Number(0),
   },
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped>
-#todoListItem {
+#weeklyTodoListItem {
   background-color: whitesmoke;
 }
 </style>

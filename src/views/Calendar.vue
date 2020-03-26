@@ -1,39 +1,39 @@
 <template>
   <div id="calendar">
-    <div id="weekOrMonthShow">
+    <div id="weeklyOrMonthlyShow">
       <input
         type="radio"
-        value="week"
-        v-model="weekOrMonthShow"
+        value="weekly"
+        v-model="weeklyOrMonthlyShow"
         checked
       >
-      <label for="week">주</label>
+      <label for="weekly">주</label>
       <input
         type="radio"
-        value="month"
-        v-model="weekOrMonthShow"
+        value="monthly"
+        v-model="weeklyOrMonthlyShow"
       >
-      <label for="month">월</label>
+      <label for="monthly">월</label>
     </div>
-    <WeekCalendar v-show="weekOrMonthShow=='week'" />
-    <MonthCalendar v-show="weekOrMonthShow=='month'" />
+    <WeeklyCalendar v-show="weeklyOrMonthlyShow=='weekly'" />
+    <MonthlyCalendar v-show="weeklyOrMonthlyShow=='monthly'" />
   </div>
 </template>
 
 <script>
-import WeekCalendar from '../components/weekCalendar/WeekCalendar.vue';
-import MonthCalendar from '../components/monthCalendar/MonthCalendar.vue';
+import WeeklyCalendar from '../components/weeklyCalendar/WeeklyCalendar.vue';
+import MonthlyCalendar from '../components/monthlyCalendar/MonthlyCalendar.vue';
 
 export default {
   name: 'Calendar',
   data() {
     return {
-      weekOrMonthShow: 'week',
+      weeklyOrMonthlyShow: 'weekly',
     };
   },
   components: {
-    WeekCalendar,
-    MonthCalendar,
+    WeeklyCalendar,
+    MonthlyCalendar,
   },
 };
 </script>
@@ -44,7 +44,7 @@ export default {
     height: 100%;
 }
 
-#weekOrMonthShow {
+#weeklyOrMonthlyShow {
   text-align: right;
 }
 </style>

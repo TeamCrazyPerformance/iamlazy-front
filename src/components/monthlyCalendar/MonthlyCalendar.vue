@@ -1,5 +1,5 @@
 <template>
-  <div id="monthCalendar">
+  <div id="monthlyCalendar">
     <p id="month">
       {{ month }} 월
     </p>
@@ -21,7 +21,7 @@
           v-for="j in 7"
           :key="j"
         >
-          <DayListItem :day-list-item-id="getDayFromFirstDayToIdx(j-1+7*(i-1))" />
+          <MonthlyDayListItem :day-list-item-id="getDayFromFirstDayToIdx(j-1+7*(i-1))" />
         </td>
       </tr>
     </table>
@@ -29,10 +29,10 @@
 </template>
 
 <script>
-import DayListItem from './DayListItem.vue';
+import MonthlyDayListItem from './MonthlyDayListItem.vue';
 
 export default {
-  name: 'MonthCalendar',
+  name: 'MonthlyCalendar',
   computed: {
     today() {
       return new Date();
@@ -54,7 +54,7 @@ export default {
     },
   },
   components: {
-    DayListItem,
+    MonthlyDayListItem,
   },
 };
 </script>

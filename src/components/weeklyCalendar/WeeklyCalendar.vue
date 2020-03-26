@@ -1,7 +1,7 @@
 <template>
-  <div id="weekCalendar">
+  <div id="weeklyCalendar">
     <div id="dayList">
-      <DayListItem
+      <WeeklyDayListItem
         v-for="i in 7"
         :key="i"
         :day-list-item-id="getDayFromFirstDayToIdx(i-1)"
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import DayListItem from './DayListItem.vue';
+import WeeklyDayListItem from './WeeklyDayListItem.vue';
 
 export default {
   name: 'WeekCalendar',
   components: {
-    DayListItem,
+    WeeklyDayListItem,
   },
   computed: {
     today() {
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-#weekCalendar {
+#weeklyCalendar {
   margin: 5px;
 }
 </style>

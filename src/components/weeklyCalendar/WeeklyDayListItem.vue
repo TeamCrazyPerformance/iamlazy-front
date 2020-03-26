@@ -1,5 +1,5 @@
 <template>
-  <div id="dayListItem">
+  <div id="weeklyDayListItem">
     <div
       id="day"
       @click="todoListShow=!todoListShow"
@@ -12,8 +12,8 @@
       id="todoList"
       v-show="todoListShow"
     >
-      <TodoListItem
-        v-for="todoListItemId in todoListItemsId"
+      <WeeklyTodoListItem
+        v-for="todoListItemId in todoListItemIds"
         :key="todoListItemId"
         :todo-list-item-id="todoListItemId"
       />
@@ -22,17 +22,17 @@
 </template>
 
 <script>
-import TodoListItem from './TodoListItem.vue';
+import WeeklyTodoListItem from './WeeklyTodoListItem.vue';
 
 export default {
-  name: 'DayListItem',
+  name: 'WeeklyDayListItem',
   props: {
     dayListItemId: Date,
   },
   data() {
     return {
       review: '회고를 입력해주세요',
-      todoListItemsId: [1, 2, 3],
+      todoListItemIds: [1, 2, 3],
       todoListShow: false,
     };
   },
@@ -42,13 +42,13 @@ export default {
     },
   },
   components: {
-    TodoListItem,
+    WeeklyTodoListItem,
   },
 };
 </script>
 
 <style scoped>
-#dayListItem {
+#weeklyDayListItem {
   background:lightgray;
   margin-top: 5px;
 }

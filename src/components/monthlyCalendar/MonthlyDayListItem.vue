@@ -1,13 +1,13 @@
 <template>
-  <div id="dayListItem">
+  <div id="monthlyDayListItem">
     <span>{{ date }}</span>
     <span v-if="active">{{ review }}</span>
     <div
       id="todoList"
       v-if="active"
     >
-      <TodoListItem
-        v-for="todoListItemId in todoListItemsId"
+      <MonthlyTodoListItem
+        v-for="todoListItemId in todoListItemIds"
         :key="todoListItemId"
         :todo-list-item-id="todoListItemId"
       />
@@ -16,21 +16,21 @@
 </template>
 
 <script>
-import TodoListItem from './TodoListItem.vue';
+import MonthlyTodoListItem from './MonthlyTodoListItem.vue';
 
 export default {
-  name: 'DayListItem',
+  name: 'MonthlyDayListItem',
   props: {
     dayListItemId: Date,
   },
   data() {
     return {
       review: ' :)',
-      todoListItemsId: [1, 2],
+      todoListItemIds: [1, 2],
     };
   },
   components: {
-    TodoListItem,
+    MonthlyTodoListItem,
   },
   computed: {
     today() {
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-#dayListItem {
+#monthlyDayListItem {
   margin-top: 5px;
   height: 100%;
   background-color: whitesmoke;

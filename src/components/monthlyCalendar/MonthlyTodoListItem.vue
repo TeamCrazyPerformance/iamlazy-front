@@ -1,12 +1,12 @@
 <template>
-  <div id="todoListItem">
+  <div id="MonthlyTodoListItem">
     {{ content }}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TodoListItem',
+  name: 'MonthlyTodoListItem',
   props: {
     todoListItemId: Number(0),
   },
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style scoped>
-#todoListItem {
+#MonthlyTodoListItem {
   background-color: lightgray;
   margin-top: 3px;
 }
