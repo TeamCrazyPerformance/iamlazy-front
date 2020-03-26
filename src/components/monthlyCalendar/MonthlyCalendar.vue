@@ -18,7 +18,7 @@
         :key="idx"
       >
         <td
-          v-for="(dayInWeek,idx2) in daysInWeek(weekInMonth)"
+          v-for="(dayInWeek,idx2) in weekInMonth"
           :key="idx2"
         >
           <monthly-day-list-item :day-list-item-id="dayInWeek" />
@@ -47,7 +47,7 @@ export default {
       return this.today.getMonth() + 1;
     },
     weeksInMonth() {
-      return [0, 1, 2, 3, 4];
+      return [...Array(5).keys()].map((x) => this.daysInWeek(x));
     },
     firstDayInMonth() {
       const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
