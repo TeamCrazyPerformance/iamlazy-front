@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="login">
     <div id="logo">
       <img
         id="logoImg"
@@ -14,7 +14,7 @@
 import KakaoLoginButton from '../components/KakaoLoginButton.vue';
 
 export default {
-  name: 'Home',
+  name: 'Login',
   components: {
     KakaoLoginButton,
   },
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-#home {
+#login {
   width: 100%;
   height: 100%;
   text-align: center;
