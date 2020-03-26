@@ -14,11 +14,11 @@
         </td>
       </tr>
       <tr
-        v-for="(weekInMonth,idx) in weeksInMonth"
+        v-for="(daysInWeek,idx) in daysInWeeks"
         :key="idx"
       >
         <td
-          v-for="(dayInWeek,idx2) in weekInMonth"
+          v-for="(dayInWeek,idx2) in daysInWeek"
           :key="idx2"
         >
           <monthly-day-list-item :day-list-item-id="dayInWeek" />
@@ -46,8 +46,8 @@ export default {
     month() {
       return this.today.getMonth() + 1;
     },
-    weeksInMonth() {
-      return [...Array(5).keys()].map((x) => this.daysInWeek(x));
+    daysInWeeks() {
+      return [...Array(5).keys()].map((x) => this.getDaysInWeek(x));
     },
     firstDayInMonth() {
       const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
@@ -56,7 +56,7 @@ export default {
     },
   },
   methods: {
-    daysInWeek(week) {
+    getDaysInWeek(week) {
       const days = [...Array(7).keys()].map((x) => new Date(this.firstDayInMonth.getFullYear(),
         this.firstDayInMonth.getMonth(), this.firstDayInMonth.getDate() + x + 7 * week));
       return days;

@@ -7,8 +7,8 @@
       v-show="active"
     >
       <MonthlyTodoListItem
-        v-for="todoListItemId in todoListItemIds"
-        :key="todoListItemId"
+        v-for="(todoListItemId, idx) in todoListItemIds"
+        :key="idx"
         :todo-list-item-id="todoListItemId"
       />
     </div>
