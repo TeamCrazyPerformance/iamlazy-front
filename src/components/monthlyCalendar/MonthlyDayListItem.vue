@@ -1,10 +1,10 @@
 <template>
   <div id="monthlyDayListItem">
     <span>{{ date }}</span>
-    <span v-if="active">{{ review }}</span>
+    <span v-show="active">{{ review }}</span>
     <div
       id="todoList"
-      v-if="active"
+      v-show="active"
     >
       <MonthlyTodoListItem
         v-for="todoListItemId in todoListItemIds"

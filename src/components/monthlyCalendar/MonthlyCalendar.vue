@@ -6,22 +6,22 @@
     <table id="monthTable">
       <tr>
         <td
-          v-for="day in ['일','월', '화', '수', '목', '금', '토'] "
-          :key="day"
+          v-for="(day,idx) in dayOfWeek"
+          :key="idx"
           id="day"
         >
           {{ day }}
         </td>
       </tr>
       <tr
-        v-for="i in 5"
-        :key="i"
+        v-for="(weekInMonth,idx) in weeksInMonth"
+        :key="idx"
       >
         <td
-          v-for="j in 7"
-          :key="j"
+          v-for="(dayInWeek,idx2) in daysInWeek(weekInMonth)"
+          :key="idx2"
         >
-          <MonthlyDayListItem :day-list-item-id="getDayFromFirstDayToIdx(j-1+7*(i-1))" />
+          <monthly-day-list-item :day-list-item-id="dayInWeek" />
         </td>
       </tr>
     </table>
@@ -33,12 +33,21 @@ import MonthlyDayListItem from './MonthlyDayListItem.vue';
 
 export default {
   name: 'MonthlyCalendar',
+  components: {
+    MonthlyDayListItem,
+  },
   computed: {
     today() {
       return new Date();
     },
+    dayOfWeek() {
+      return ['일', '월', '화', '수', '목', '금', '토'];
+    },
     month() {
       return this.today.getMonth() + 1;
+    },
+    weeksInMonth() {
+      return [0, 1, 2, 3, 4];
     },
     firstDayInMonth() {
       const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
@@ -47,14 +56,11 @@ export default {
     },
   },
   methods: {
-    getDayFromFirstDayToIdx(idx) {
-      const currentDay = new Date(this.firstDayInMonth);
-      currentDay.setDate(this.firstDayInMonth.getDate() + idx);
-      return currentDay;
+    daysInWeek(week) {
+      const days = [...Array(7).keys()].map((x) => new Date(this.firstDayInMonth.getFullYear(),
+        this.firstDayInMonth.getMonth(), this.firstDayInMonth.getDate() + x + 7 * week));
+      return days;
     },
-  },
-  components: {
-    MonthlyDayListItem,
   },
 };
 </script>
