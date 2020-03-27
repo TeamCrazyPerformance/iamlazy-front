@@ -1,6 +1,9 @@
 <template>
-  <img id="loginImg" src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
-  v-on:click="loginWithKakao()"/>
+  <img
+    id="loginImg"
+    src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
+    @click="loginWithKakao()"
+  >
 </template>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -9,7 +12,7 @@
 const kakaoAPI ='95883d28e87701fe86b707e0b9fc768a';
 
 export default {
-  name: 'Login',
+  name: 'KakaoLoginButton',
   methods: {
     loginWithKakao() {
       Kakao.init(kakaoAPI);
@@ -21,6 +24,7 @@ export default {
           alert('로그인에 실패했습니다.');
         }
       });
+      this.$router.push('calendar');
     }
   },
 };
