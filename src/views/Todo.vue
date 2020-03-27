@@ -1,0 +1,126 @@
+<template>
+  <div id="todo">
+    <b-button
+      id="back"
+      @click="goBack()"
+    >
+      &lsaquo;
+    </b-button>
+    <p>{{ formatedDate }}</p>
+    <b-form @submit="onSubmit">
+      <b-form-input
+        id="todoTitle"
+        v-model="form.todoTitle"
+        type="text"
+        required
+        placeholder="title"
+      />
+      <b-form-select
+        id="repeatableUnit"
+        v-model="form.repeatUnit"
+        :options="repeatUnitList"
+        required
+      />
+      <div
+        id="repeatable"
+        v-show="form.repeatableYN"
+      >
+        <b-form-datepicker
+          id="startDate"
+          v-model="form.startDate"
+          class="mb-2"
+        />
+        <b-form-datepicker
+          id="endDate"
+          v-model="form.endDate"
+          class="mb-2"
+        />
+      </div>
+      <b-form-checkbox
+        id="finish"
+        v-model="form.finish"
+        value="1"
+        unchecked-value="0"
+      >
+        완료하였습니다!
+      </b-form-checkbox>
+      <b-form-textarea
+        id="todoContent"
+        v-model="form.todoContent"
+        placeholder="content"
+        rows="3"
+        max-rows="6"
+      />
+      <b-button
+        type="submit"
+        variant="primary"
+      >
+        확인
+      </b-button>
+    </b-form>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Todo',
+  data() {
+    return {
+      form: {
+        todoTitle: '',
+        todoContent: '',
+        todoDate: new Date(),
+        repeatableYN: 0,
+        repeatUnit: '반복없음',
+        startDate: '',
+        endDate: '',
+        finish: 0,
+      },
+      repeatUnitList: ['반복없음', '매일', '매주', '매월'],
+    };
+  },
+  watch: {
+    'form.repeatUnit': {
+      handler() {
+        if (this.form.repeatUnit === '반복없음') this.form.repeatableYN = 0;
+        else this.form.repeatableYN = 1;
+      },
+    },
+  },
+  computed: {
+    formatedDate() {
+      const date = this.form.todoDate.toISOString().split('T')[0].split('-');
+      return `${date[0]}년 ${date[1]}월 ${date[2]}일`;
+    },
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
+      this.goBack();
+      alert(JSON.stringify(this.form));
+    },
+    goBack() {
+      window.history.back();
+    },
+  },
+};
+</script>
+
+<style scoped>
+#todo {
+  padding: 5%;
+}
+#todo * {
+  margin-top: 5%;
+}
+p {
+  display: inline-block;
+  text-align: center;
+  width: 90%;
+  margin-bottom: 0px;
+  font-size: 25px;
+}
+#back {
+ vertical-align: top;
+}
+</style>

@@ -1,10 +1,17 @@
 <template>
-  <div id="weeklyTodoListItem">
+  <div
+    id="weeklyTodoListItem"
+  >
     <input
       type="checkbox"
       v-model="finish"
     >
-    <span>{{ content }}</span>
+    <span
+      id="content"
+      @click="moveToTodo"
+    >
+      {{ content }}
+    </span>
   </div>
 </template>
 
@@ -12,13 +19,21 @@
 export default {
   name: 'WeeklyTodoListItem',
   props: {
-    todoListItemId: Number(0),
+    todoListItemId: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
       content: '할일',
       finish: false,
     };
+  },
+  methods: {
+    moveToTodo() {
+      this.$router.push(`/todos/${this.todoListItemId}`);
+    },
   },
 };
 </script>
