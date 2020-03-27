@@ -2,11 +2,20 @@
   <div id="weeklyDayListItem">
     <div
       id="day"
-      @click="todoListShow=!todoListShow"
+      @click="showTodoList"
     >
       <span>{{ formatedDate }}</span>
       <br>
-      <span>{{ review }}</span>
+      <span
+        id="review"
+        @click="showReviewModal"
+      >
+        {{ reviewContent }}
+      </span>
+      <review-modal
+        v-if="reviewModalShow"
+        :date="dayListItemId"
+      />
     </div>
     <div
       id="todoList"
@@ -23,17 +32,26 @@
 
 <script>
 import WeeklyTodoListItem from './WeeklyTodoListItem.vue';
+import ReviewModal from '../ReviewModal.vue';
 
 export default {
   name: 'WeeklyDayListItem',
+  components: {
+    WeeklyTodoListItem,
+    ReviewModal,
+  },
   props: {
-    dayListItemId: Date,
+    dayListItemId: {
+      type: Date,
+      default: new Date(),
+    },
   },
   data() {
     return {
-      review: '회고를 입력해주세요',
+      reviewContent: '회고를 입력해주세요',
       todoListItemIds: [1, 2, 3],
       todoListShow: false,
+      reviewModalShow: false,
     };
   },
   computed: {
@@ -41,8 +59,15 @@ export default {
       return this.dayListItemId.toISOString().split('T')[0];
     },
   },
-  components: {
-    WeeklyTodoListItem,
+  methods: {
+    showTodoList() {
+      this.todoListShow = !this.todoListShow;
+    },
+    showReviewModal(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.reviewModalShow = !this.reviewModalShow;
+    },
   },
 };
 </script>

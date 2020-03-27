@@ -1,7 +1,19 @@
 <template>
   <div id="monthlyDayListItem">
-    <span>{{ date }}</span>
-    <span v-show="active">{{ review }}</span>
+    <span
+      id="date"
+    >{{ date }}</span>
+    <span
+      id="review"
+      v-show="active"
+      @click="showReviewModal"
+    >
+      {{ reviewEmoticon }}
+    </span>
+    <review-modal
+      v-if="reviewModalShow"
+      :date="dayListItemId"
+    />
     <div
       id="todoList"
       v-show="active"
@@ -16,21 +28,27 @@
 </template>
 
 <script>
+import ReviewModal from '../ReviewModal.vue';
 import MonthlyTodoListItem from './MonthlyTodoListItem.vue';
 
 export default {
   name: 'MonthlyDayListItem',
   props: {
-    dayListItemId: Date,
+    dayListItemId: {
+      type: Date,
+      default: new Date(),
+    },
   },
   data() {
     return {
-      review: ' :)',
+      reviewEmoticon: ' :)',
       todoListItemIds: [1, 2],
+      reviewModalShow: false,
     };
   },
   components: {
     MonthlyTodoListItem,
+    ReviewModal,
   },
   computed: {
     today() {
@@ -41,6 +59,11 @@ export default {
     },
     active() {
       return this.today.getMonth() === this.dayListItemId.getMonth();
+    },
+  },
+  methods: {
+    showReviewModal() {
+      this.reviewModalShow = !this.reviewModalShow;
     },
   },
 };
