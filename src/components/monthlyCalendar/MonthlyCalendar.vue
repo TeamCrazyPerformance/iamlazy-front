@@ -36,12 +36,14 @@ export default {
   components: {
     MonthlyDayListItem,
   },
+  data() {
+    return {
+      dayOfWeek: ['일', '월', '화', '수', '목', '금', '토'],
+    };
+  },
   computed: {
     today() {
       return new Date();
-    },
-    dayOfWeek() {
-      return ['일', '월', '화', '수', '목', '금', '토'];
     },
     month() {
       return this.today.getMonth() + 1;
