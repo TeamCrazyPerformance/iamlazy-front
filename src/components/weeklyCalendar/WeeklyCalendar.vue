@@ -30,7 +30,7 @@ export default {
     },
     daysInWeek() {
       const days = [...Array(7).keys()].map((x) => new Date(this.firstDayInWeek.getFullYear(),
-        this.firstDayInWeek.getMonth(), this.firstDayInWeek.getDate() + x));
+        this.firstDayInWeek.getMonth(), this.firstDayInWeek.getDate() + x + 1));
       return days;
     },
   },
@@ -40,5 +40,6 @@ export default {
 <style scoped>
 #weeklyCalendar {
   margin: 5px;
+  padding: 10px;
 }
 </style>

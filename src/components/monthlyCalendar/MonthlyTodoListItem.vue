@@ -3,7 +3,7 @@
     id="MonthlyTodoListItem"
     @click="moveToTodo()"
   >
-    {{ content }}
+    {{ form.todoContent }}
   </div>
 </template>
 
@@ -18,7 +18,10 @@ export default {
   },
   data() {
     return {
-      content: '할일',
+      form: {
+        todoContent: '할일',
+        finish: false,
+      },
     };
   },
   methods: {
@@ -31,7 +34,11 @@ export default {
 
 <style scoped>
 #MonthlyTodoListItem {
-  background-color: lightgray;
+  color:  #fff;
+  background-color: #007bff;
+  border: #007bff 1px solid;
+  padding: 1px;
   margin-top: 3px;
+  font-size: 10px;
 }
 </style>

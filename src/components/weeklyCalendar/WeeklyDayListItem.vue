@@ -4,13 +4,12 @@
       id="day"
       @click="showTodoList"
     >
-      <span>{{ formatedDate }}</span>
-      <br>
+      <h4>{{ formatedDate }}</h4>
       <span
         id="review"
         @click="showReviewModal"
       >
-        {{ reviewContent }}
+        {{ form.reviewContent }}
       </span>
       <review-modal
         v-if="reviewModalShow"
@@ -19,10 +18,11 @@
     </div>
     <div
       id="todoList"
-      v-show="todoListShow"
+      v-if="todoListShow"
     >
+      <hr>
       <WeeklyTodoListItem
-        v-for="(todoListItemId,idx) in todoListItemIds"
+        v-for="(todoListItemId,idx) in form.todoListItemIds"
         :key="idx"
         :todo-list-item-id="todoListItemId"
       />
@@ -48,15 +48,18 @@ export default {
   },
   data() {
     return {
-      reviewContent: '회고를 입력해주세요',
-      todoListItemIds: [1, 2, 3],
+      form: {
+        reviewContent: '회고를 입력해주세요',
+        todoListItemIds: [1, 2, 3],
+      },
       todoListShow: false,
       reviewModalShow: false,
     };
   },
   computed: {
     formatedDate() {
-      return this.dayListItemId.toISOString().split('T')[0];
+      const date = this.dayListItemId.toISOString().split('T')[0].split('-');
+      return `${date[0]}년 ${date[1]}월 ${date[2]}일`;
     },
   },
   methods: {
@@ -74,10 +77,9 @@ export default {
 
 <style scoped>
 #weeklyDayListItem {
-  background:lightgray;
   margin-top: 5px;
-}
-#day {
-  text-align: left;
+  border: gray 1px solid;
+  border-radius: 10px;
+  padding: 15px;
 }
 </style>

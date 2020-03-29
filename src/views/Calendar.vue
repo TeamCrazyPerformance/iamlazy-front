@@ -1,22 +1,27 @@
 <template>
   <div id="calendar">
-    <div id="weeklyOrMonthlyShow">
-      <input
-        type="radio"
-        value="weekly"
-        v-model="weeklyOrMonthlyShow"
-        checked
+    <div id="nav">
+      <div
+        id="setting"
       >
-      <label for="weekly">주</label>
-      <input
-        type="radio"
-        value="monthly"
-        v-model="weeklyOrMonthlyShow"
-      >
-      <label for="monthly">월</label>
+        <b-button
+          variant="outline-secondary"
+          @click="moveSetting"
+        >
+          설정
+        </b-button>
+      </div>
+      <b-form-radio-group
+        id="calendarShowOptions"
+        v-model="calendarShow"
+        :options="calendarShowOptions"
+        buttons
+        button-variant="outline-primary"
+        name="radios-btn-default"
+      />
     </div>
-    <WeeklyCalendar v-show="weeklyOrMonthlyShow=='weekly'" />
-    <MonthlyCalendar v-show="weeklyOrMonthlyShow=='monthly'" />
+    <WeeklyCalendar v-show="calendarShow=='weekly'" />
+    <MonthlyCalendar v-show="calendarShow=='monthly'" />
   </div>
 </template>
 
@@ -28,12 +33,21 @@ export default {
   name: 'Calendar',
   data() {
     return {
-      weeklyOrMonthlyShow: 'weekly',
+      calendarShowOptions: [
+        { text: '주', value: 'weekly' },
+        { text: '월', value: 'monthly' },
+      ],
+      calendarShow: 'weekly',
     };
   },
   components: {
     WeeklyCalendar,
     MonthlyCalendar,
+  },
+  methods: {
+    moveSetting() {
+      this.$router.push('setting');
+    },
   },
 };
 </script>
@@ -44,7 +58,18 @@ export default {
     height: 100%;
 }
 
-#weeklyOrMonthlyShow {
+#nav {
+  padding: 15px;
+}
+
+#setting {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+#calendarShowOptions {
+  display: inline-block;
+  width: 50%;
   text-align: right;
 }
 </style>

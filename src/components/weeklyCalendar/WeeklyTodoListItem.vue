@@ -2,16 +2,16 @@
   <div
     id="weeklyTodoListItem"
   >
-    <input
-      type="checkbox"
-      v-model="finish"
+    <b-form-checkbox
+      v-model="form.finish"
     >
-    <span
-      id="content"
-      @click="moveToTodo"
-    >
-      {{ content }}
-    </span>
+      <span
+        id="todoContent"
+        @click="moveToTodo"
+      >
+        {{ form.todoContent }}
+      </span>
+    </b-form-checkbox>
   </div>
 </template>
 
@@ -26,8 +26,10 @@ export default {
   },
   data() {
     return {
-      content: '할일',
-      finish: false,
+      form: {
+        todoContent: '할일',
+        finish: false,
+      },
     };
   },
   methods: {
@@ -40,6 +42,6 @@ export default {
 
 <style scoped>
 #weeklyTodoListItem {
-  background-color: whitesmoke;
+  margin: 5px;
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <b-modal
     id="review"
-    v-model="modal"
+    v-model="modalShow"
     @ok="submitReview"
     title="오늘의 회고"
   >
     <b-form-select
       id="autoReview"
       v-model="autoReviewContent"
-      :options="autoReviewOptions"
+      :options="autoReviewContentOptions"
     />
     <b-form-input
       id="manualReview"
@@ -20,7 +20,7 @@
     />
     <b-form-radio-group
       id="emoticon"
-      v-model="emoticon"
+      v-model="form.emoticon"
       :options="emoticonOptions"
       value-field="item"
       text-field="name"
@@ -40,31 +40,42 @@ export default {
   },
   data() {
     return {
-      modal: true,
-      emoticon: 0,
+      form: {
+        reviewContent: '',
+        emoticon: '',
+      },
       emoticonOptions: [
         { item: 0, name: ':)' },
         { item: 1, name: ':(' },
         { item: 2, name: ':0' },
         { item: 3, name: ':|' }],
       autoReviewContent: '직접입력',
-      autoReviewOptions: ['직접입력', '알찬하루', '게을렀다'],
+      autoReviewContentOptions: ['직접입력', '알찬하루', '게을렀다'],
       manualReviewContent: '',
+      modalShow: true,
     };
+  },
+  watch: {
+    autoReviewContent: {
+      handler() {
+        this.form.reviewContent = this.autoReviewContent;
+      },
+    },
+    manualReviewContent: {
+      handler() {
+        this.form.reviewContent = this.manualReviewContent;
+      },
+    },
   },
   computed: {
     isManual() {
       if (this.autoReviewContent === '직접입력') return true;
       return false;
     },
-    reviewContent() {
-      if (this.isManual) return this.manualReviewContent;
-      return this.autoReviewContent;
-    },
   },
   methods: {
     submitReview() {
-      alert(`reviewContent : ${this.reviewContent}, emoticon : ${this.emoticon}`);
+      alert(JSON.stringify(this.form));
     },
   },
 };

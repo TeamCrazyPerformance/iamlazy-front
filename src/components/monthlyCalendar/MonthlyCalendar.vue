@@ -1,8 +1,8 @@
 <template>
   <div id="monthlyCalendar">
-    <p id="month">
+    <h3 id="month">
       {{ month }} 월
-    </p>
+    </h3>
     <table id="monthTable">
       <tr>
         <td
@@ -68,12 +68,19 @@ export default {
 </script>
 
 <style scoped>
-#monthTable {
-  width: 100%;
-  height: 100%;
-}
-#month, #day {
+#monthlyCalendar {
+  margin: 5px;
+  padding: 5px;
+  height: 80%;
   text-align: center;
 }
-
+#monthTable {
+  width: 100%;
+  height: 90%;
+}
+#month {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
 </style>

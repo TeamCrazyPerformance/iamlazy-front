@@ -1,6 +1,7 @@
 <template>
   <div id="todo">
     <b-button
+      variant="outline-secondary"
       id="back"
       @click="goBack()"
     >
@@ -18,7 +19,7 @@
       <b-form-select
         id="repeatableUnit"
         v-model="form.repeatUnit"
-        :options="repeatUnitList"
+        :options="repeatUnitOptions"
         required
       />
       <div
@@ -70,13 +71,13 @@ export default {
         todoTitle: '',
         todoContent: '',
         todoDate: new Date(),
-        repeatableYN: 0,
+        isRepeatable: false,
         repeatUnit: '반복없음',
         startDate: '',
         endDate: '',
-        finish: 0,
+        finish: false,
       },
-      repeatUnitList: ['반복없음', '매일', '매주', '매월'],
+      repeatUnitOptions: ['반복없음', '매일', '매주', '매월'],
     };
   },
   watch: {
@@ -96,8 +97,8 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.goBack();
       alert(JSON.stringify(this.form));
+      this.goBack();
     },
     goBack() {
       window.history.back();

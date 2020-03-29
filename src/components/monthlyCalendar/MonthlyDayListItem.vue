@@ -1,14 +1,17 @@
 <template>
   <div id="monthlyDayListItem">
+    <hr>
     <span
       id="date"
-    >{{ date }}</span>
+    >
+      {{ date }}
+    </span>
     <span
-      id="review"
+      id="emoticon"
       v-show="active"
       @click="showReviewModal"
     >
-      {{ reviewEmoticon }}
+      {{ form.reviewEmoticon }}
     </span>
     <review-modal
       v-if="reviewModalShow"
@@ -19,7 +22,7 @@
       v-show="active"
     >
       <MonthlyTodoListItem
-        v-for="(todoListItemId, idx) in todoListItemIds"
+        v-for="(todoListItemId, idx) in form.todoListItemIds"
         :key="idx"
         :todo-list-item-id="todoListItemId"
       />
@@ -41,8 +44,10 @@ export default {
   },
   data() {
     return {
-      reviewEmoticon: ' :)',
-      todoListItemIds: [1, 2],
+      form: {
+        reviewEmoticon: ' :)',
+        todoListItemIds: [1, 2],
+      },
       reviewModalShow: false,
     };
   },
@@ -71,8 +76,23 @@ export default {
 
 <style scoped>
 #monthlyDayListItem {
-  margin-top: 5px;
   height: 100%;
-  background-color: whitesmoke;
+  padding: 5px;
+  text-align: left;
+}
+#date {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+#emoticon {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+}
+hr {
+  margin-top: 0px;
+  margin-bottom: 8px;
+  border-top: 1px solid lightgray;
 }
 </style>
