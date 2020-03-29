@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Login from '../views/Login.vue';
 import Calendar from '../views/Calendar.vue';
 import Todo from '../views/Todo.vue';
+import Setting from '../views/Setting.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/todos/:todoId',
     name: 'Todo',
     component: Todo,
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: Setting,
   },
 ];
 
