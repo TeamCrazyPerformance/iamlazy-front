@@ -24,6 +24,10 @@ export default {
       default: 0,
     },
   },
+  created() {
+    this.$http.get('http://121.130.167.189:8080/todos?authenticated=false&credentials=%7B%7D&date=today&details=%7B%7D')
+      .then(() => { alert('success'); });
+  },
   data() {
     return {
       form: {
