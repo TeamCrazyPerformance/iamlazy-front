@@ -11,20 +11,20 @@
       v-show="active"
       @click="showReviewModal"
     >
-      {{ form.reviewEmoticon }}
+      {{ reviewForm.reviewEmoticon }}
     </span>
     <review-modal
       v-if="reviewModalShow"
-      :date="dayListItemId"
+      :review-form="reviewFrom"
     />
     <div
       id="todoList"
       v-show="active"
     >
       <MonthlyTodoListItem
-        v-for="(todoListItemId, idx) in form.todoListItemIds"
+        v-for="(todoFormListItem, idx) in todoFormList"
         :key="idx"
-        :todo-list-item-id="todoListItemId"
+        :todo-list-item-id="todoFormListItem"
       />
     </div>
   </div>
@@ -44,10 +44,8 @@ export default {
   },
   data() {
     return {
-      form: {
-        reviewEmoticon: ' :)',
-        todoListItemIds: [1, 2],
-      },
+      reviewForm: {},
+      todoFormList: [],
       reviewModalShow: false,
     };
   },

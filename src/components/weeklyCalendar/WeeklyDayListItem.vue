@@ -9,11 +9,12 @@
         id="review"
         @click="showReviewModal"
       >
-        {{ form.reviewContent }}
+        {{ reviewForm.reviewContent }}
+        {{ reviewForm.emoticon }}
       </span>
       <review-modal
         v-if="reviewModalShow"
-        :date="dayListItemId"
+        :review-form="reviewFrom"
       />
     </div>
     <div
@@ -22,9 +23,9 @@
     >
       <hr>
       <WeeklyTodoListItem
-        v-for="(todoListItemId,idx) in form.todoListItemIds"
+        v-for="(todoFormListItem,idx) in todoFormList"
         :key="idx"
-        :todo-list-item-id="todoListItemId"
+        :todo-form-list-item="todoFormListItem"
       />
     </div>
   </div>
@@ -48,13 +49,24 @@ export default {
   },
   data() {
     return {
-      form: {
-        reviewContent: '회고를 입력해주세요',
-        todoListItemIds: [1, 2, 3],
-      },
+      reviewForm: {},
+      todoFormList: [],
       todoListShow: false,
       reviewModalShow: false,
     };
+  },
+  created() {
+    this.$http.get(`http://121.130.167.189:8092/todos?date=${this.dayListItemId.toISOString()}`, {
+      headers: {
+        Authorization: `Bearer ${this.$route.query.token}`,
+      },
+    })
+      .then((res) => {
+        res.data.forEach((element) => {
+          this.todoFormList.push(element);
+        });
+      })
+      .catch();
   },
   computed: {
     formatedDate() {

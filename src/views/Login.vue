@@ -7,6 +7,7 @@
       >
     </div>
     <kakao-login-button />
+    <a href="http://121.130.167.189:8092/oauth2/authorize/kakao?redirect_uri=http://localhost:8080/oauth/redirect">login</a>
   </div>
 </template>
 

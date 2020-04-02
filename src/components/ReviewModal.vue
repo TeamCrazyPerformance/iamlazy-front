@@ -20,7 +20,7 @@
     />
     <b-form-radio-group
       id="emoticon"
-      v-model="form.emoticon"
+      v-model="reviewForm.emoticon"
       :options="emoticonOptions"
       value-field="item"
       text-field="name"
@@ -33,17 +33,13 @@
 export default {
   name: 'ReviewModal',
   props: {
-    date: {
-      type: Date,
-      default: new Date(),
+    reviewForm: {
+      type: Object,
+      default: null,
     },
   },
   data() {
     return {
-      form: {
-        reviewContent: '',
-        emoticon: '',
-      },
       emoticonOptions: [
         { item: 0, name: ':)' },
         { item: 1, name: ':(' },
@@ -58,12 +54,12 @@ export default {
   watch: {
     autoReviewContent: {
       handler() {
-        this.form.reviewContent = this.autoReviewContent;
+        this.reviewForm.reviewContent = this.autoReviewContent;
       },
     },
     manualReviewContent: {
       handler() {
-        this.form.reviewContent = this.manualReviewContent;
+        this.reviewForm.reviewContent = this.manualReviewContent;
       },
     },
   },
@@ -75,7 +71,7 @@ export default {
   },
   methods: {
     submitReview() {
-      alert(JSON.stringify(this.form));
+      alert(JSON.stringify(this.reviewForm));
     },
   },
 };

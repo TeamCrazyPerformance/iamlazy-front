@@ -1,9 +1,9 @@
 <template>
   <div
     id="MonthlyTodoListItem"
-    @click="moveToTodo()"
+    @click="moveToTodo"
   >
-    {{ form.todoContent }}
+    {{ todoFormListItem.todoContent }}
   </div>
 </template>
 
@@ -11,22 +11,14 @@
 export default {
   name: 'MonthlyTodoListItem',
   props: {
-    todoListItemId: {
-      type: Number,
-      default: 0,
+    todoFormListItem: {
+      type: Object,
+      default: null,
     },
-  },
-  data() {
-    return {
-      form: {
-        todoContent: '할일',
-        finish: false,
-      },
-    };
   },
   methods: {
     moveToTodo() {
-      this.$router.push(`/todos/${this.todoListItemId}`);
+      this.$router.push(`/todos/${this.todoFormListItem.todoIdx}`);
     },
   },
 };

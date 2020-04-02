@@ -29,7 +29,12 @@
       >
         미달성률을 볼래요.
       </b-form-checkbox>
-      <b-button type="submit" variant="primary">확인</b-button>
+      <b-button
+        type="submit"
+        variant="primary"
+      >
+        확인
+      </b-button>
     </b-form>
   </div>
 </template>

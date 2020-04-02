@@ -14,7 +14,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/calendar',
+    path: '/oauth/redirect',
     name: 'Calendar',
     component: Calendar,
   },
