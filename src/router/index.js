@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Login from '../views/Login.vue';
 import Calendar from '../views/Calendar.vue';
 import Setting from '../views/Setting.vue';
+import WeeklyCalendar from '../components/weeklyCalendar/WeeklyCalendar.vue';
+import Monthlyalendar from '../components/monthlyCalendar/MonthlyCalendar.vue';
 
 Vue.use(VueRouter);
 
@@ -16,6 +18,16 @@ const routes = [
     path: '/calendar',
     name: 'Calendar',
     component: Calendar,
+    children: [
+      {
+        path: 'weekly',
+        component: WeeklyCalendar,
+      },
+      {
+        path: 'monthly',
+        component: Monthlyalendar,
+      },
+    ],
   },
   {
     path: '/setting',

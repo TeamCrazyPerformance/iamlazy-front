@@ -13,36 +13,37 @@
       </div>
       <b-form-radio-group
         id="calendarShowOptions"
-        v-model="calendarShow"
-        :options="calendarShowOptions"
+        v-model="selectedCalendarType"
+        :options="calendarTypes"
         buttons
         button-variant="outline-primary"
         name="radios-btn-default"
       />
     </div>
-    <WeeklyCalendar v-show="calendarShow=='weekly'" />
-    <MonthlyCalendar v-show="calendarShow=='monthly'" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import WeeklyCalendar from '../components/weeklyCalendar/WeeklyCalendar.vue';
-import MonthlyCalendar from '../components/monthlyCalendar/MonthlyCalendar.vue';
 
 export default {
   name: 'Calendar',
   data() {
     return {
-      calendarShowOptions: [
+      calendarTypes: [
         { text: '주', value: 'weekly' },
         { text: '월', value: 'monthly' },
       ],
-      calendarShow: 'weekly',
+      selectedCalendarType: 'weekly',
     };
   },
-  components: {
-    WeeklyCalendar,
-    MonthlyCalendar,
+  watch: {
+    selectedCalendarType: {
+      immediate: true,
+      handler() {
+        this.$router.push(`/calendar/${this.selectedCalendarType}`);
+      },
+    },
   },
   methods: {
     moveSetting() {
