@@ -1,16 +1,15 @@
 <template>
   <div id="monthlyCalendar">
-    <h3 id="month">
+    <p id="month">
       {{ month }} 월
-    </h3>
-    <table id="monthTable">
+    </p>
+    <table id="monthlyCalendarTable">
       <tr>
         <td
-          v-for="(day,idx) in dayOfWeek"
+          v-for="(dayOption,idx) in dayOptions"
           :key="idx"
-          id="day"
         >
-          {{ day }}
+          {{ dayOption }}
         </td>
       </tr>
       <tr
@@ -21,7 +20,7 @@
           v-for="(dayInWeek,idx2) in daysInWeek"
           :key="idx2"
         >
-          <monthly-day-list-item :day-list-item-id="dayInWeek" />
+          <monthly-day-list-item :day-list-item-day="dayInWeek" />
         </td>
       </tr>
     </table>
@@ -38,7 +37,7 @@ export default {
   },
   data() {
     return {
-      dayOfWeek: ['일', '월', '화', '수', '목', '금', '토'],
+      dayOptions: ['일', '월', '화', '수', '목', '금', '토'],
     };
   },
   computed: {
@@ -74,7 +73,7 @@ export default {
   height: 80%;
   text-align: center;
 }
-#monthTable {
+#monthlyCalendarTable {
   width: 100%;
   height: 90%;
 }
@@ -82,5 +81,6 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 0px;
+  font-size: 20px;
 }
 </style>

@@ -4,7 +4,7 @@
       <WeeklyDayListItem
         v-for="(dayInWeek,idx) in daysInWeek"
         :key="idx"
-        :day-list-item-id="dayInWeek"
+        :day-list-item-day="dayInWeek"
       />
     </div>
   </div>

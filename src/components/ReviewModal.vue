@@ -1,19 +1,19 @@
 <template>
   <b-modal
-    id="review"
-    v-model="modalShow"
+    id="reviewModal"
+    v-model="showReivewModal"
     @ok="submitReview"
     title="오늘의 회고"
   >
     <b-form-select
       id="autoReview"
-      v-model="autoReviewContent"
+      v-model="reviewForm.reviewContent"
       :options="autoReviewContentOptions"
     />
     <b-form-input
       id="manualReview"
       v-show="isManual"
-      v-model="manualReviewContent"
+      v-model="reviewForm.reviewContent"
       type="text"
       placeholder="회고를 입력하세요"
       required
@@ -40,6 +40,7 @@ export default {
   },
   data() {
     return {
+      showReivewModal: true,
       emoticonOptions: [
         { item: 0, name: ':)' },
         { item: 1, name: ':(' },
@@ -48,20 +49,7 @@ export default {
       autoReviewContent: '직접입력',
       autoReviewContentOptions: ['직접입력', '알찬하루', '게을렀다'],
       manualReviewContent: '',
-      modalShow: true,
     };
-  },
-  watch: {
-    autoReviewContent: {
-      handler() {
-        this.reviewForm.reviewContent = this.autoReviewContent;
-      },
-    },
-    manualReviewContent: {
-      handler() {
-        this.reviewForm.reviewContent = this.manualReviewContent;
-      },
-    },
   },
   computed: {
     isManual() {

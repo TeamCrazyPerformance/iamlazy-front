@@ -3,17 +3,17 @@
     id="weeklyTodoListItem"
   >
     <b-form-checkbox
-      v-model="todoFormListItem.finish"
+      v-model="todoForm.finish"
+    />
+    <span
+      id="todoContent"
+      @click.stop="showTodoModal=!showTodoModal"
     >
-      <span
-        id="todoContent"
-        @click="todoModalShow = !todoModalShow"
-      >
-        {{ todoFormListItem.todoContent }}
-      </span>
-    </b-form-checkbox>
+      {{ todoForm.todoContent }}
+    </span>
     <todo-modal
-      v-if="todoModalShow"
+      v-if="showTodoModal"
+      :todo-form="todoForm"
     />
   </div>
 </template>
@@ -24,14 +24,14 @@ import TodoModal from '../TodoModal.vue';
 export default {
   name: 'WeeklyTodoListItem',
   props: {
-    todoFormListItem: {
+    todoForm: {
       type: Object,
       default: null,
     },
   },
   data() {
     return {
-      todoModalShow: false,
+      showTodoModal: false,
     };
   },
   components: {

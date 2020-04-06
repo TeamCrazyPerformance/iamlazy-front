@@ -1,31 +1,25 @@
 <template>
   <div id="monthlyDayListItem">
     <hr>
-    <span
-      id="date"
-    >
-      {{ date }}
-    </span>
-    <span
-      id="emoticon"
-      v-show="active"
-      @click="showReviewModal"
-    >
-      {{ reviewForm.reviewEmoticon }}
-    </span>
-    <review-modal
-      v-if="reviewModalShow"
-      :review-form="reviewFrom"
-    />
-    <div
-      id="todoList"
-      v-show="active"
-    >
-      <MonthlyTodoListItem
-        v-for="(todoFormListItem, idx) in todoFormList"
-        :key="idx"
-        :todo-list-item-id="todoFormListItem"
+    <div v-show="active">
+      <span id="date"> {{ date }} </span>
+      <span
+        id="emoticon"
+        @click.stop="showReviewModal = !showReviewModal"
+      >
+        {{ reviewForm.emoticon }}
+      </span>
+      <review-modal
+        v-if="showReviewModal"
+        :review-form="reviewForm"
       />
+      <div id="todoList">
+        <MonthlyTodoListItem
+          v-for="(todoForm, idx) in todoForms"
+          :key="idx"
+          :todo-form="todoForm"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -37,16 +31,40 @@ import MonthlyTodoListItem from './MonthlyTodoListItem.vue';
 export default {
   name: 'MonthlyDayListItem',
   props: {
-    dayListItemId: {
+    dayListItemDay: {
       type: Date,
       default: new Date(),
     },
   },
   data() {
     return {
-      reviewForm: {},
-      todoFormList: [],
-      reviewModalShow: false,
+      reviewForm: {
+        reviewContent: '회고',
+        emoticon: ':)',
+      },
+      todoForms: [
+        {
+          todoTitle: '할일',
+          todoContent: '할일',
+          todoDate: this.dayListItemDay,
+          repeatableYN: true,
+          repeatUnit: '반복없음',
+          startDate: this.dayListItemDay,
+          endDate: this.dayListItemDay,
+          finish: false,
+        },
+        {
+          todoTitle: '할일',
+          todoContent: '할일',
+          todoDate: this.dayListItemDay,
+          repeatableYN: true,
+          repeatUnit: '반복없음',
+          startDate: this.dayListItemDay,
+          endDate: this.dayListItemDay,
+          finish: false,
+        },
+      ],
+      showReviewModal: false,
     };
   },
   components: {
@@ -58,15 +76,10 @@ export default {
       return new Date();
     },
     date() {
-      return this.dayListItemId.getDate();
+      return this.dayListItemDay.getDate();
     },
     active() {
-      return this.today.getMonth() === this.dayListItemId.getMonth();
-    },
-  },
-  methods: {
-    showReviewModal() {
-      this.reviewModalShow = !this.reviewModalShow;
+      return this.today.getMonth() === this.dayListItemDay.getMonth();
     },
   },
 };

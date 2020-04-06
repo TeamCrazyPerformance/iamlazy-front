@@ -1,33 +1,35 @@
 <template>
   <div
     id="MonthlyTodoListItem"
-    @click="todoModalShow = !todoModalShow"
+    @click="showTodoModal=!showTodoModal"
   >
-    {{ todoFormListItem.todoContent }}
+    {{ todoForm.todoContent }}
     <todo-modal
-      v-if="todoModalShow"
+      v-if="showTodoModal"
+      @close="showTodoModal=!showTodoModal"
+      :todo-form="todoForm"
     />
   </div>
 </template>
 
 <script>
-import todoModal from '../TodoModal.vue';
+import TodoModal from '../TodoModal.vue';
 
 export default {
   name: 'MonthlyTodoListItem',
   props: {
-    todoFormListItem: {
+    todoForm: {
       type: Object,
       default: null,
     },
   },
   data() {
     return {
-      todoModalShow: false,
+      showTodoModal: false,
     };
   },
   components: {
-    todoModal,
+    TodoModal,
   },
 };
 </script>

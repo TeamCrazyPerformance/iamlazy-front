@@ -1,73 +1,68 @@
 <template>
-  <b-modal id="todo">
-    <b-button
-      variant="outline-secondary"
-      id="back"
-      @click="goBack()"
+  <b-modal
+    id="todoModal"
+    v-model="showTodoModal"
+    @ok="submitTodo"
+    title="오늘의 회고"
+  >
+    <b-form-input
+      id="todoTitle"
+      v-model="todoForm.todoTitle"
+      type="text"
+      required
+      placeholder="title"
+    />
+    <b-form-select
+      id="repeatableUnit"
+      v-model="todoForm.repeatUnit"
+      :options="repeatUnitOptions"
+      required
+    />
+    <div
+      id="repeatable"
+      v-show="todoForm.repeatableYN"
     >
-      &lsaquo;
-    </b-button>
-    <p>{{ formatedDate }}</p>
-    <b-form @submit="onSubmit">
-      <b-form-input
-        id="todoTitle"
-        v-model="form.todoTitle"
-        type="text"
-        required
-        placeholder="title"
+      <b-form-datepicker
+        id="startDate"
+        v-model="todoForm.startDate"
+        class="mb-2"
       />
-      <b-form-select
-        id="repeatableUnit"
-        v-model="form.repeatUnit"
-        :options="repeatUnitOptions"
-        required
+      <b-form-datepicker
+        id="endDate"
+        v-model="todoForm.endDate"
+        class="mb-2"
       />
-      <div
-        id="repeatable"
-        v-show="form.repeatableYN"
-      >
-        <b-form-datepicker
-          id="startDate"
-          v-model="form.startDate"
-          class="mb-2"
-        />
-        <b-form-datepicker
-          id="endDate"
-          v-model="form.endDate"
-          class="mb-2"
-        />
-      </div>
-      <b-form-checkbox
-        id="finish"
-        v-model="form.finish"
-        value="1"
-        unchecked-value="0"
-      >
-        완료하였습니다!
-      </b-form-checkbox>
-      <b-form-textarea
-        id="todoContent"
-        v-model="form.todoContent"
-        placeholder="content"
-        rows="3"
-        max-rows="6"
-      />
-      <b-button
-        type="submit"
-        variant="primary"
-      >
-        확인
-      </b-button>
-    </b-form>
+    </div>
+    <b-form-checkbox
+      id="finish"
+      v-model="todoForm.finish"
+      value="1"
+      unchecked-value="0"
+    >
+      완료하였습니다!
+    </b-form-checkbox>
+    <b-form-textarea
+      id="todoContent"
+      v-model="todoForm.todoContent"
+      placeholder="content"
+      rows="3"
+      max-rows="6"
+    />
   </b-modal>
 </template>
 
 <script>
 export default {
   name: 'TodoModal',
+  props: {
+    todoForm: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
-      form: {},
+      showTodoModal: true,
       repeatUnitOptions: ['반복없음', '매일', '매주', '매월'],
     };
   },
@@ -89,13 +84,8 @@ export default {
     },
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.goBack();
-    },
-    goBack() {
-      window.history.back();
+    submitTodo() {
+      alert(JSON.stringify(this.todoForm));
     },
   },
 };
@@ -117,5 +107,51 @@ p {
 }
 #back {
  vertical-align: top;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 </style>

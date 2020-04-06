@@ -2,30 +2,30 @@
   <div id="weeklyDayListItem">
     <div
       id="day"
-      @click="showTodoList"
+      @click="showTodoList = !showTodoList"
     >
       <h4>{{ formatedDate }}</h4>
       <span
         id="review"
-        @click="showReviewModal"
+        @click.stop="showReviewModal = !showReviewModal"
       >
         {{ reviewForm.reviewContent }}
         {{ reviewForm.emoticon }}
       </span>
       <review-modal
-        v-if="reviewModalShow"
-        :review-form="reviewFrom"
+        v-if="showReviewModal"
+        :review-form="reviewForm"
       />
     </div>
     <div
       id="todoList"
-      v-if="todoListShow"
+      v-if="showTodoList"
     >
       <hr>
       <WeeklyTodoListItem
-        v-for="(todoFormListItem,idx) in todoFormList"
+        v-for="(todoForm,idx) in todoForms"
         :key="idx"
-        :todo-form-list-item="todoFormListItem"
+        :todo-form="todoForm"
       />
     </div>
   </div>
@@ -42,33 +42,47 @@ export default {
     ReviewModal,
   },
   props: {
-    dayListItemId: {
+    dayListItemDay: {
       type: Date,
       default: new Date(),
     },
   },
   data() {
     return {
-      reviewForm: {},
-      todoFormList: [],
-      todoListShow: false,
-      reviewModalShow: false,
+      reviewForm: {
+        reviewContent: '회고',
+        emoticon: ':)',
+      },
+      todoForms: [
+        {
+          todoTitle: '할일',
+          todoContent: '할일',
+          todoDate: this.dayListItemDay,
+          repeatableYN: true,
+          repeatUnit: '반복없음',
+          startDate: this.dayListItemDay,
+          endDate: this.dayListItemDay,
+          finish: false,
+        },
+        {
+          todoTitle: '할일',
+          todoContent: '할일',
+          todoDate: this.dayListItemDay,
+          repeatableYN: true,
+          repeatUnit: '반복없음',
+          startDate: this.dayListItemDay,
+          endDate: this.dayListItemDay,
+          finish: false,
+        },
+      ],
+      showTodoList: false,
+      showReviewModal: false,
     };
   },
   computed: {
     formatedDate() {
-      const date = this.dayListItemId.toISOString().split('T')[0].split('-');
+      const date = this.dayListItemDay.toISOString().split('T')[0].split('-');
       return `${date[0]}년 ${date[1]}월 ${date[2]}일`;
-    },
-  },
-  methods: {
-    showTodoList() {
-      this.todoListShow = !this.todoListShow;
-    },
-    showReviewModal(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
-      this.reviewModalShow = !this.reviewModalShow;
     },
   },
 };
