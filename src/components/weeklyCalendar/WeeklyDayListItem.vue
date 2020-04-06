@@ -55,19 +55,6 @@ export default {
       reviewModalShow: false,
     };
   },
-  created() {
-    this.$http.get(`http://121.130.167.189:8092/todos?date=${this.dayListItemId.toISOString()}`, {
-      headers: {
-        Authorization: `Bearer ${this.$route.query.token}`,
-      },
-    })
-      .then((res) => {
-        res.data.forEach((element) => {
-          this.todoFormList.push(element);
-        });
-      })
-      .catch();
-  },
   computed: {
     formatedDate() {
       const date = this.dayListItemId.toISOString().split('T')[0].split('-');

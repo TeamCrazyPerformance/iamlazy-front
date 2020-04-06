@@ -71,17 +71,6 @@ export default {
       repeatUnitOptions: ['반복없음', '매일', '매주', '매월'],
     };
   },
-  created() {
-    this.$http.get(`http://121.130.167.189:8092/todos/${this.$route.params.todoId}`, {
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzE5NTI1Nzg0IiwiaWF0IjoxNTg1ODEzNDg0LCJleHAiOjE1ODY2Nzc0ODR9.mQRqSx1PoXdUT2Fcmu2zRpx8ijAEJ4-Ibp6dQaNY9Ng8PtHqNsqt9bk8Japbmh4kHtfGlsQkl8XSaflgMbAfYw',
-      },
-    })
-      .then((res) => {
-        this.form = res.data;
-      })
-      .catch();
-  },
   watch: {
     'form.repeatUnit': {
       handler() {
