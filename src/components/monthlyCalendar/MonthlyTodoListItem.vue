@@ -1,13 +1,18 @@
 <template>
   <div
     id="MonthlyTodoListItem"
-    @click="moveToTodo"
+    @click="todoModalShow = !todoModalShow"
   >
     {{ todoFormListItem.todoContent }}
+    <todo-modal
+      v-if="todoModalShow"
+    />
   </div>
 </template>
 
 <script>
+import todoModal from '../TodoModal.vue';
+
 export default {
   name: 'MonthlyTodoListItem',
   props: {
@@ -16,10 +21,13 @@ export default {
       default: null,
     },
   },
-  methods: {
-    moveToTodo() {
-      this.$router.push(`/todos/${this.todoFormListItem.todoIdx}`);
-    },
+  data() {
+    return {
+      todoModalShow: false,
+    };
+  },
+  components: {
+    todoModal,
   },
 };
 </script>

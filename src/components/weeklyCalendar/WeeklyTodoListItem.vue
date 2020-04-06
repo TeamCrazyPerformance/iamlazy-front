@@ -7,15 +7,20 @@
     >
       <span
         id="todoContent"
-        @click="moveToTodo"
+        @click="todoModalShow = !todoModalShow"
       >
         {{ todoFormListItem.todoContent }}
       </span>
     </b-form-checkbox>
+    <todo-modal
+      v-if="todoModalShow"
+    />
   </div>
 </template>
 
 <script>
+import TodoModal from '../TodoModal.vue';
+
 export default {
   name: 'WeeklyTodoListItem',
   props: {
@@ -24,10 +29,13 @@ export default {
       default: null,
     },
   },
-  methods: {
-    moveToTodo() {
-      this.$router.push(`/todos/${this.todoFormListItem.todoIdx}`);
-    },
+  data() {
+    return {
+      todoModalShow: false,
+    };
+  },
+  components: {
+    TodoModal,
   },
 };
 </script>

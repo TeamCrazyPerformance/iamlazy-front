@@ -1,5 +1,5 @@
 <template>
-  <div id="todo">
+  <b-modal id="todo">
     <b-button
       variant="outline-secondary"
       id="back"
@@ -59,12 +59,12 @@
         확인
       </b-button>
     </b-form>
-  </div>
+  </b-modal>
 </template>
 
 <script>
 export default {
-  name: 'Todo',
+  name: 'TodoModal',
   data() {
     return {
       form: {},
