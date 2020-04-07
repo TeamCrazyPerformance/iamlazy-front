@@ -4,7 +4,6 @@
   >
     <b-form-checkbox
       v-model="todo.finish"
-      id="finish"
     >
       <span
         id="todoContent"

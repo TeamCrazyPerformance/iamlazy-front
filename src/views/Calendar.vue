@@ -13,8 +13,8 @@
       </div>
       <b-form-radio-group
         id="calendarShowOptions"
-        v-model="selectedCalendarType"
-        :options="calendarTypes"
+        v-model="calendarType"
+        :options="calendarTypeOptions"
         buttons
         button-variant="outline-primary"
       />
@@ -29,18 +29,18 @@ export default {
   name: 'Calendar',
   data() {
     return {
-      calendarTypes: [
+      calendarTypeOptions: [
         { text: '주', value: 'Weekly' },
         { text: '월', value: 'Monthly' },
       ],
-      selectedCalendarType: 'Weekly',
+      calendarType: 'Weekly',
     };
   },
   watch: {
-    selectedCalendarType: {
+    calendarType: {
       immediate: true,
       handler() {
-        this.$router.push({ name: this.selectedCalendarType });
+        this.$router.push({ name: this.calendarType });
       },
     },
   },
