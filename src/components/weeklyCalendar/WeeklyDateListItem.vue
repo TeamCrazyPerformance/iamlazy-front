@@ -1,20 +1,19 @@
 <template>
-  <div id="weeklyDayListItem">
+  <div id="weeklyDateListItem">
     <div
-      id="day"
       @click="showTodoList = !showTodoList"
     >
-      <h4>{{ formatedDate }}</h4>
+      <h4>{{ date }}</h4>
       <span
         id="review"
         @click.stop="showReviewModal = !showReviewModal"
       >
-        {{ reviewForm.reviewContent }}
-        {{ reviewForm.emoticon }}
+        {{ review.reviewContent }}
+        {{ review.emoticon }}
       </span>
       <review-modal
         v-if="showReviewModal"
-        :review-form="reviewForm"
+        :review-date="review.reviewDate"
       />
     </div>
     <div
@@ -23,9 +22,9 @@
     >
       <hr>
       <WeeklyTodoListItem
-        v-for="(todoForm,idx) in todoForms"
+        v-for="(todo,idx) in todos"
         :key="idx"
-        :todo-form="todoForm"
+        :todo-idx="todo.todoIdx"
       />
     </div>
   </div>
@@ -36,60 +35,69 @@ import WeeklyTodoListItem from './WeeklyTodoListItem.vue';
 import ReviewModal from '../ReviewModal.vue';
 
 export default {
-  name: 'WeeklyDayListItem',
+  name: 'WeeklyDateListItem',
   components: {
     WeeklyTodoListItem,
     ReviewModal,
   },
   props: {
-    dayListItemDay: {
+    dateListItemDate: {
       type: Date,
       default: new Date(),
     },
   },
   data() {
     return {
-      reviewForm: {
+      showTodoList: false,
+      showReviewModal: false,
+      review: {
+        userId: 0,
+        reviewDate: '2020-04-06',
         reviewContent: '회고',
-        emoticon: ':)',
+        emoticon: 2,
       },
-      todoForms: [
+      todos: [
         {
+          userId: 0,
+          todoIdx: 1,
           todoTitle: '할일',
           todoContent: '할일',
-          todoDate: this.dayListItemDay,
-          repeatableYN: true,
-          repeatUnit: '반복없음',
-          startDate: this.dayListItemDay,
-          endDate: this.dayListItemDay,
+          todoDate: '2020-04-06',
+          repeatableYN: false,
+          repeatUnit: 0,
+          startDate: '2020-04-06',
+          endDate: '2020-04-06',
+          weekDay: '',
+          monthDay: 0,
           finish: false,
         },
         {
+          userId: 0,
+          todoIdx: 2,
           todoTitle: '할일',
           todoContent: '할일',
-          todoDate: this.dayListItemDay,
-          repeatableYN: true,
-          repeatUnit: '반복없음',
-          startDate: this.dayListItemDay,
-          endDate: this.dayListItemDay,
+          todoDate: '2020-04-06',
+          repeatableYN: false,
+          repeatUnit: 0,
+          startDate: '2020-04-06',
+          endDate: '2020-04-06',
+          weekDay: '',
+          monthDay: 0,
           finish: false,
         },
       ],
-      showTodoList: false,
-      showReviewModal: false,
     };
   },
   computed: {
-    formatedDate() {
-      const date = this.dayListItemDay.toISOString().split('T')[0].split('-');
-      return `${date[0]}년 ${date[1]}월 ${date[2]}일`;
+    date() {
+      return this.dateListItemDate.toISOString().split('T')[0];
     },
   },
 };
 </script>
 
 <style scoped>
-#weeklyDayListItem {
+#weeklyDateListItem {
   margin-top: 5px;
   border: gray 1px solid;
   border-radius: 10px;

@@ -1,5 +1,5 @@
 <template>
-  <div id="monthlyDayListItem">
+  <div id="monthlyDateListItem">
     <hr>
     <div v-show="active">
       <span id="date"> {{ date }} </span>
@@ -7,17 +7,17 @@
         id="emoticon"
         @click.stop="showReviewModal = !showReviewModal"
       >
-        {{ reviewForm.emoticon }}
+        {{ review.emoticon }}
       </span>
       <review-modal
         v-if="showReviewModal"
-        :review-form="reviewForm"
+        :reivew-date="review.reivewDate"
       />
       <div id="todoList">
         <MonthlyTodoListItem
-          v-for="(todoForm, idx) in todoForms"
+          v-for="(todo, idx) in todos"
           :key="idx"
-          :todo-form="todoForm"
+          :todo-idx="todo.todoIdx"
         />
       </div>
     </div>
@@ -29,42 +29,52 @@ import ReviewModal from '../ReviewModal.vue';
 import MonthlyTodoListItem from './MonthlyTodoListItem.vue';
 
 export default {
-  name: 'MonthlyDayListItem',
+  name: 'MonthlyDateListItem',
   props: {
-    dayListItemDay: {
+    dateListItemDate: {
       type: Date,
       default: new Date(),
     },
   },
   data() {
     return {
-      reviewForm: {
+      showReviewModal: false,
+      review: {
+        userId: 0,
+        reviewDate: '2020-04-06',
         reviewContent: '회고',
-        emoticon: ':)',
+        emoticon: 2,
       },
-      todoForms: [
+      todos: [
         {
+          userId: 0,
+          todoIdx: 1,
           todoTitle: '할일',
           todoContent: '할일',
-          todoDate: this.dayListItemDay,
-          repeatableYN: true,
-          repeatUnit: '반복없음',
-          startDate: this.dayListItemDay,
-          endDate: this.dayListItemDay,
+          todoDate: '2020-04-06',
+          repeatableYN: false,
+          repeatUnit: 0,
+          startDate: '2020-04-06',
+          endDate: '2020-04-06',
+          weekDay: '',
+          monthDay: 0,
           finish: false,
         },
         {
+          userId: 0,
+          todoIdx: 2,
           todoTitle: '할일',
           todoContent: '할일',
-          todoDate: this.dayListItemDay,
-          repeatableYN: true,
-          repeatUnit: '반복없음',
-          startDate: this.dayListItemDay,
-          endDate: this.dayListItemDay,
+          todoDate: '2020-04-06',
+          repeatableYN: false,
+          repeatUnit: 0,
+          startDate: '2020-04-06',
+          endDate: '2020-04-06',
+          weekDay: '',
+          monthDay: 0,
           finish: false,
         },
       ],
-      showReviewModal: false,
     };
   },
   components: {
@@ -72,21 +82,19 @@ export default {
     ReviewModal,
   },
   computed: {
-    today() {
-      return new Date();
-    },
     date() {
-      return this.dayListItemDay.getDate();
+      return this.dateListItemDate.getDate();
     },
     active() {
-      return this.today.getMonth() === this.dayListItemDay.getMonth();
+      const today = new Date();
+      return today.getMonth() === this.dateListItemDate.getMonth();
     },
   },
 };
 </script>
 
 <style scoped>
-#monthlyDayListItem {
+#monthlyDateListItem {
   height: 100%;
   padding: 5px;
   text-align: left;

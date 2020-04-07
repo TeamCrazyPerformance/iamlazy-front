@@ -1,7 +1,7 @@
 <template>
   <div id="monthlyCalendar">
     <p id="month">
-      {{ month }} 월
+      {{ month }}
     </p>
     <table id="monthlyCalendarTable">
       <tr>
@@ -13,14 +13,14 @@
         </td>
       </tr>
       <tr
-        v-for="(daysInWeek,idx) in daysInWeeks"
+        v-for="(datesInWeek,idx) in datesInWeeks"
         :key="idx"
       >
         <td
-          v-for="(dayInWeek,idx2) in daysInWeek"
+          v-for="(dateInWeek,idx2) in datesInWeek"
           :key="idx2"
         >
-          <monthly-day-list-item :day-list-item-day="dayInWeek" />
+          <monthly-date-list-item :date-list-item-date="dateInWeek" />
         </td>
       </tr>
     </table>
@@ -28,12 +28,12 @@
 </template>
 
 <script>
-import MonthlyDayListItem from './MonthlyDayListItem.vue';
+import MonthlyDateListItem from './MonthlyDateListItem.vue';
 
 export default {
   name: 'MonthlyCalendar',
   components: {
-    MonthlyDayListItem,
+    MonthlyDateListItem,
   },
   data() {
     return {
@@ -41,26 +41,18 @@ export default {
     };
   },
   computed: {
-    today() {
-      return new Date();
-    },
     month() {
-      return this.today.getMonth() + 1;
+      const today = new Date();
+      return `${today.getMonth() + 1} 월`;
     },
-    daysInWeeks() {
-      return [...Array(5).keys()].map((x) => this.getDaysInWeek(x));
-    },
-    firstDayInMonth() {
-      const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
-      firstDay.setDate(firstDay.getDate() - firstDay.getDay());
-      return firstDay;
-    },
-  },
-  methods: {
-    getDaysInWeek(week) {
-      const days = [...Array(7).keys()].map((x) => new Date(this.firstDayInMonth.getFullYear(),
-        this.firstDayInMonth.getMonth(), this.firstDayInMonth.getDate() + x + 7 * week));
-      return days;
+    datesInWeeks() {
+      const today = new Date();
+      const firstDateInMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      firstDateInMonth.setDate(firstDateInMonth.getDate() - firstDateInMonth.getDay());
+      return [...Array(5).keys()].map((x) => [...Array(7).keys()].map((y) => new Date(
+        firstDateInMonth.getFullYear(), firstDateInMonth.getMonth(),
+        firstDateInMonth.getDate() + y + 7 * x,
+      )));
     },
   },
 };

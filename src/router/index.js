@@ -21,10 +21,12 @@ const routes = [
     children: [
       {
         path: 'weekly',
+        name: 'Weekly',
         component: WeeklyCalendar,
       },
       {
         path: 'monthly',
+        name: 'Monthly',
         component: Monthlyalendar,
       },
     ],

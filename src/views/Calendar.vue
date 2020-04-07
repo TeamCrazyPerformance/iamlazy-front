@@ -6,7 +6,7 @@
       >
         <b-button
           variant="outline-secondary"
-          @click="moveSetting"
+          @click="goSetting"
         >
           설정
         </b-button>
@@ -17,7 +17,6 @@
         :options="calendarTypes"
         buttons
         button-variant="outline-primary"
-        name="radios-btn-default"
       />
     </div>
     <router-view />
@@ -31,23 +30,23 @@ export default {
   data() {
     return {
       calendarTypes: [
-        { text: '주', value: 'weekly' },
-        { text: '월', value: 'monthly' },
+        { text: '주', value: 'Weekly' },
+        { text: '월', value: 'Monthly' },
       ],
-      selectedCalendarType: 'weekly',
+      selectedCalendarType: 'Weekly',
     };
   },
   watch: {
     selectedCalendarType: {
       immediate: true,
       handler() {
-        this.$router.push(`/calendar/${this.selectedCalendarType}`);
+        this.$router.push({ name: this.selectedCalendarType });
       },
     },
   },
   methods: {
-    moveSetting() {
-      this.$router.push('setting');
+    goSetting() {
+      this.$router.push({ name: 'Setting' });
     },
   },
 };

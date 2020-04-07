@@ -2,30 +2,29 @@
   <div id="setting">
     <b-button
       variant="outline-secondary"
-      id="back"
-      @click="goBack()"
+      @click="goBack"
     >
-      &lsaquo;
+      Back
     </b-button>
     <p>설정</p>
     <b-form
-      id="statistics"
+      id="settingContent"
       @submit="onSubmit"
     >
       <b-form-checkbox
-        v-model="form.statisticsShow"
+        v-model="setting.statisticsYN"
       >
         통계값을 볼래요.
       </b-form-checkbox>
       <b-form-checkbox
-        v-show="form.statisticsShow"
-        v-model="form.achiveStatisticsShow"
+        v-show="setting.statisticsYN"
+        v-model="setting.achivementYN"
       >
         달성율을 볼래요.
       </b-form-checkbox>
       <b-form-checkbox
-        v-show="form.statisticsShow"
-        v-model="form.failStatisticsShow"
+        v-show="setting.statisticsYN"
+        v-model="setting.failStatisticsShow"
       >
         미달성률을 볼래요.
       </b-form-checkbox>
@@ -44,20 +43,19 @@ export default {
   name: 'Setting',
   data() {
     return {
-      form: {
-        statisticsShow: true,
-        achiveStatisticsShow: true,
-        failStatisticsShow: true,
+      setting: {
+        statisticsYN: false,
+        achivementYN: false,
+        failureYN: false,
       },
     };
   },
   methods: {
     goBack() {
-      window.history.back();
+      this.$router.go(-1);
     },
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+    onSubmit() {
+      alert(JSON.stringify(this.setting));
       this.goBack();
     },
   },
@@ -78,10 +76,10 @@ p {
   margin-bottom: 0px;
   font-size: 25px;
 }
-#back {
+#backButton {
  vertical-align: top;
 }
-#statistics {
+#settingContent {
   padding: 10px;
 }
 </style>

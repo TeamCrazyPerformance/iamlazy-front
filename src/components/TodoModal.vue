@@ -2,48 +2,44 @@
   <b-modal
     id="todoModal"
     v-model="showTodoModal"
-    @ok="submitTodo"
-    title="오늘의 회고"
+    @ok="onSubmit"
+    title="오늘의 할일"
   >
     <b-form-input
       id="todoTitle"
-      v-model="todoForm.todoTitle"
+      v-model="todo.todoTitle"
       type="text"
-      required
       placeholder="title"
     />
     <b-form-select
       id="repeatableUnit"
-      v-model="todoForm.repeatUnit"
+      v-model="todo.repeatUnit"
       :options="repeatUnitOptions"
-      required
     />
     <div
       id="repeatable"
-      v-show="todoForm.repeatableYN"
+      v-show="todo.repeatableYN"
     >
       <b-form-datepicker
         id="startDate"
-        v-model="todoForm.startDate"
+        v-model="todo.startDate"
         class="mb-2"
       />
       <b-form-datepicker
         id="endDate"
-        v-model="todoForm.endDate"
+        v-model="todo.endDate"
         class="mb-2"
       />
     </div>
     <b-form-checkbox
       id="finish"
-      v-model="todoForm.finish"
-      value="1"
-      unchecked-value="0"
+      v-model="todo.finish"
     >
       완료하였습니다!
     </b-form-checkbox>
     <b-form-textarea
       id="todoContent"
-      v-model="todoForm.todoContent"
+      v-model="todo.todoContent"
       placeholder="content"
       rows="3"
       max-rows="6"
@@ -55,37 +51,46 @@
 export default {
   name: 'TodoModal',
   props: {
-    todoForm: {
-      type: Object,
+    todoIdx: {
+      type: Number,
       default: null,
     },
   },
   data() {
     return {
       showTodoModal: true,
-      repeatUnitOptions: ['반복없음', '매일', '매주', '매월'],
+      repeatUnitOptions: [
+        { text: '반복없음', value: 0 },
+        { text: '매일', value: 1 },
+        { text: '매주', value: 2 },
+        { text: '매월', value: 3 }],
+      todo: {
+        userId: 0,
+        todoIdx: 1,
+        todoTitle: '할일',
+        todoContent: '할일',
+        todoDate: '2020-04-06',
+        repeatableYN: false,
+        repeatUnit: 0,
+        startDate: '2020-04-06',
+        endDate: '2020-04-06',
+        weekDay: '',
+        monthDay: 0,
+        finish: false,
+      },
     };
   },
   watch: {
-    'form.repeatUnit': {
+    'todo.repeatUnit': {
       handler() {
-        if (this.form.repeatUnit === '반복없음') this.form.repeatableYN = 0;
-        else this.form.repeatableYN = 1;
+        if (this.todo.repeatUnit) this.todo.repeatableYN = true;
+        else this.todo.repeatableYN = false;
       },
     },
   },
-  computed: {
-    formatedDate() {
-      if (this.form.todoDate) {
-        const date = this.form.todoDate.split('T')[0].split('-');
-        return `${date[0]}년 ${date[1]}월 ${date[2]}일`;
-      }
-      return '0000년00월00일';
-    },
-  },
   methods: {
-    submitTodo() {
-      alert(JSON.stringify(this.todoForm));
+    onSubmit() {
+      alert(JSON.stringify(this.todo));
     },
   },
 };

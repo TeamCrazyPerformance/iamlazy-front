@@ -1,37 +1,31 @@
 <template>
   <div id="weeklyCalendar">
-    <div id="dayList">
-      <WeeklyDayListItem
-        v-for="(dayInWeek,idx) in daysInWeek"
+    <div id="dateList">
+      <WeeklyDateListItem
+        v-for="(dateInWeek,idx) in datesInWeek"
         :key="idx"
-        :day-list-item-day="dayInWeek"
+        :date-list-item-date="dateInWeek"
       />
     </div>
   </div>
 </template>
 
 <script>
-import WeeklyDayListItem from './WeeklyDayListItem.vue';
+import WeeklyDateListItem from './WeeklyDateListItem.vue';
 
 export default {
   name: 'WeekCalendar',
   components: {
-    WeeklyDayListItem,
+    WeeklyDateListItem,
   },
   computed: {
-    today() {
-      return new Date();
-    },
-    firstDayInWeek() {
-      const firstDay = new Date(this.today.getFullYear(), this.today.getMonth(),
-        this.today.getDate());
-      firstDay.setDate(firstDay.getDate() - firstDay.getDay());
-      return firstDay;
-    },
-    daysInWeek() {
-      const days = [...Array(7).keys()].map((x) => new Date(this.firstDayInWeek.getFullYear(),
-        this.firstDayInWeek.getMonth(), this.firstDayInWeek.getDate() + x + 1));
-      return days;
+    datesInWeek() {
+      const today = new Date();
+      const firstDateInWeek = new Date(
+        today.getFullYear(), today.getMonth(), today.getDate() - today.getDay(),
+      );
+      return [...Array(7).keys()].map((x) => new Date(firstDateInWeek.getFullYear(),
+        firstDateInWeek.getMonth(), firstDateInWeek.getDate() + x + 1));
     },
   },
 };
