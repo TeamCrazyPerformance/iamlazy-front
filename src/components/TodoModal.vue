@@ -18,7 +18,7 @@
     />
     <div
       id="repeatable"
-      v-show="todo.repeatableYN"
+      v-show="!!todo.repeatUnit"
     >
       <b-form-datepicker
         id="startDate"
@@ -70,7 +70,6 @@ export default {
         todoTitle: '할일',
         todoContent: '할일',
         todoDate: '2020-04-06',
-        repeatableYN: false,
         repeatUnit: 0,
         startDate: '2020-04-06',
         endDate: '2020-04-06',
@@ -79,14 +78,6 @@ export default {
         finish: false,
       },
     };
-  },
-  watch: {
-    'todo.repeatUnit': {
-      handler() {
-        if (this.todo.repeatUnit) this.todo.repeatableYN = true;
-        else this.todo.repeatableYN = false;
-      },
-    },
   },
   methods: {
     onSubmit() {
