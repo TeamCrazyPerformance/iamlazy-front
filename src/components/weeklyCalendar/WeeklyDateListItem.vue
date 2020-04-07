@@ -3,7 +3,7 @@
     <div
       @click="showTodoList = !showTodoList"
     >
-      <h4>{{ date }}</h4>
+      <h4>{{ dateString }}</h4>
       <span
         id="review"
         @click.stop="showReviewModal = !showReviewModal"
@@ -50,45 +50,17 @@ export default {
     return {
       showTodoList: false,
       showReviewModal: false,
-      review: {
-        userId: 0,
-        reviewDate: '2020-04-06',
-        reviewContent: '회고',
-        emoticon: 2,
-      },
-      todos: [
-        {
-          userId: 0,
-          todoIdx: 1,
-          todoTitle: '할일',
-          todoContent: '할일',
-          todoDate: '2020-04-06',
-          repeatUnit: 0,
-          startDate: '2020-04-06',
-          endDate: '2020-04-06',
-          weekDay: '',
-          monthDay: 0,
-          finish: false,
-        },
-        {
-          userId: 0,
-          todoIdx: 2,
-          todoTitle: '할일',
-          todoContent: '할일',
-          todoDate: '2020-04-06',
-          repeatUnit: 0,
-          startDate: '2020-04-06',
-          endDate: '2020-04-06',
-          weekDay: '',
-          monthDay: 0,
-          finish: false,
-        },
-      ],
     };
   },
   computed: {
-    date() {
+    dateString() {
       return this.dateListItemDate.toISOString().split('T')[0];
+    },
+    review() {
+      return this.$store.getters.reviewByDate(this.dateString);
+    },
+    todos() {
+      return this.$store.getters.todosByDate(this.dateString);
     },
   },
 };

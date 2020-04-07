@@ -43,18 +43,16 @@ export default {
         { text: ':0', value: 2 },
         { text: ':|', value: 3 }],
       autoReviewOptions: ['직접입력', '알찬하루', '게을렀다'],
-      review: {
-        userId: 0,
-        reviewDate: '2020-04-06',
-        reviewContent: '회고',
-        emoticon: 2,
-      },
+      review: null,
     };
   },
   methods: {
     onSubmit() {
       alert(JSON.stringify(this.review));
     },
+  },
+  created() {
+    this.review = { ...this.$store.getters.reviewByDate(this.reviewDate) };
   },
 };
 </script>

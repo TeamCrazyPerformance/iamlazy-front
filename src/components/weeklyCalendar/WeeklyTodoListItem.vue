@@ -33,24 +33,15 @@ export default {
   data() {
     return {
       showTodoModal: false,
-      todo: {
-        userId: 0,
-        todoIdx: 1,
-        todoTitle: '할일',
-        todoContent: '할일',
-        todoDate: '2020-04-06',
-        repeatableYN: false,
-        repeatUnit: 0,
-        startDate: '2020-04-06',
-        endDate: '2020-04-06',
-        weekDay: '',
-        monthDay: 0,
-        finish: false,
-      },
     };
   },
   components: {
     TodoModal,
+  },
+  computed: {
+    todo() {
+      return this.$store.getters.todoByIdx(this.todoIdx);
+    },
   },
 };
 </script>

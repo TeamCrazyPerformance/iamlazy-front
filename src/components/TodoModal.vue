@@ -64,25 +64,16 @@ export default {
         { text: '매일', value: 1 },
         { text: '매주', value: 2 },
         { text: '매월', value: 3 }],
-      todo: {
-        userId: 0,
-        todoIdx: 1,
-        todoTitle: '할일',
-        todoContent: '할일',
-        todoDate: '2020-04-06',
-        repeatUnit: 0,
-        startDate: '2020-04-06',
-        endDate: '2020-04-06',
-        weekDay: '',
-        monthDay: 0,
-        finish: false,
-      },
+      todo: null,
     };
   },
   methods: {
     onSubmit() {
       alert(JSON.stringify(this.todo));
     },
+  },
+  created() {
+    this.todo = { ...this.$store.getters.todoByIdx(this.todoIdx) };
   },
 };
 </script>
