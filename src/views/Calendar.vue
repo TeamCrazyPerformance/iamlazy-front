@@ -1,39 +1,53 @@
 <template>
   <div id="calendar">
-    <div id="weeklyOrMonthlyShow">
-      <input
-        type="radio"
-        value="weekly"
-        v-model="weeklyOrMonthlyShow"
-        checked
+    <div id="nav">
+      <div
+        id="setting"
       >
-      <label for="weekly">주</label>
-      <input
-        type="radio"
-        value="monthly"
-        v-model="weeklyOrMonthlyShow"
-      >
-      <label for="monthly">월</label>
+        <b-button
+          variant="outline-secondary"
+          @click="goSetting"
+        >
+          설정
+        </b-button>
+      </div>
+      <b-form-radio-group
+        id="calendarShowOptions"
+        v-model="calendarType"
+        :options="calendarTypeOptions"
+        buttons
+        button-variant="outline-primary"
+      />
     </div>
-    <WeeklyCalendar v-show="weeklyOrMonthlyShow=='weekly'" />
-    <MonthlyCalendar v-show="weeklyOrMonthlyShow=='monthly'" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import WeeklyCalendar from '../components/weeklyCalendar/WeeklyCalendar.vue';
-import MonthlyCalendar from '../components/monthlyCalendar/MonthlyCalendar.vue';
 
 export default {
   name: 'Calendar',
   data() {
     return {
-      weeklyOrMonthlyShow: 'weekly',
+      calendarTypeOptions: [
+        { text: '주', value: 'Weekly' },
+        { text: '월', value: 'Monthly' },
+      ],
+      calendarType: 'Weekly',
     };
   },
-  components: {
-    WeeklyCalendar,
-    MonthlyCalendar,
+  watch: {
+    calendarType: {
+      immediate: true,
+      handler() {
+        this.$router.push({ name: this.calendarType });
+      },
+    },
+  },
+  methods: {
+    goSetting() {
+      this.$router.push({ name: 'Setting' });
+    },
   },
 };
 </script>
@@ -44,7 +58,18 @@ export default {
     height: 100%;
 }
 
-#weeklyOrMonthlyShow {
+#nav {
+  padding: 15px;
+}
+
+#setting {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+#calendarShowOptions {
+  display: inline-block;
+  width: 50%;
   text-align: right;
 }
 </style>

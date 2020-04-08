@@ -1,30 +1,53 @@
 <template>
-  <div id="weeklyTodoListItem">
-    <input
-      type="checkbox"
-      v-model="finish"
+  <div
+    id="weeklyTodoListItem"
+  >
+    <b-form-checkbox
+      v-model="todo.finish"
     >
-    <span>{{ content }}</span>
+      <span
+        id="todoContent"
+        @click.prevent="showTodoModal=!showTodoModal"
+      >
+        {{ todo.todoContent }}
+      </span>
+    </b-form-checkbox>
+    <todo-modal
+      v-if="showTodoModal"
+      :todo-idx="todo.todoIdx"
+    />
   </div>
 </template>
 
 <script>
+import TodoModal from '../TodoModal.vue';
+
 export default {
   name: 'WeeklyTodoListItem',
   props: {
-    todoListItemId: Number(0),
+    todoIdx: {
+      type: Number,
+      default: null,
+    },
   },
   data() {
     return {
-      content: '할일',
-      finish: false,
+      showTodoModal: false,
     };
+  },
+  components: {
+    TodoModal,
+  },
+  computed: {
+    todo() {
+      return this.$store.getters.todoByIdx(this.todoIdx);
+    },
   },
 };
 </script>
 
 <style scoped>
 #weeklyTodoListItem {
-  background-color: whitesmoke;
+  margin: 5px;
 }
 </style>

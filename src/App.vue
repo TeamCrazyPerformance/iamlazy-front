@@ -12,7 +12,6 @@
   -moz-osx-font-smoothing: grayscale;
   max-width: 506px;
   height: 900px;
-  border: black 1px solid;
   margin: 0 auto;
 }
 </style>

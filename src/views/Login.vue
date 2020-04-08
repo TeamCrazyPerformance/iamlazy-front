@@ -6,18 +6,15 @@
         src="../../public/logo.png"
       >
     </div>
-    <kakao-login-button />
+    <a href ="http://121.130.167.189:8092/oauth2/authorize/kakao?redirect_uri=http://localhost:8080/oauth/redirect">
+      카카오로 로그인하기
+    </a>
   </div>
 </template>
 
 <script>
-import KakaoLoginButton from '../components/KakaoLoginButton.vue';
-
 export default {
   name: 'Login',
-  components: {
-    KakaoLoginButton,
-  },
 };
 </script>
 

@@ -1,26 +1,50 @@
 <template>
-  <div id="MonthlyTodoListItem">
-    {{ content }}
+  <div
+    id="MonthlyTodoListItem"
+    @click="showTodoModal=!showTodoModal"
+  >
+    {{ todo.todoContent }}
+    <todo-modal
+      v-if="showTodoModal"
+      :todo-idx="todo.todoIdx"
+    />
   </div>
 </template>
 
 <script>
+import TodoModal from '../TodoModal.vue';
+
 export default {
   name: 'MonthlyTodoListItem',
   props: {
-    todoListItemId: Number(0),
+    todoIdx: {
+      type: Number,
+      default: null,
+    },
   },
   data() {
     return {
-      content: '할일',
+      showTodoModal: false,
     };
+  },
+  components: {
+    TodoModal,
+  },
+  computed: {
+    todo() {
+      return this.$store.getters.todoByIdx(this.todoIdx);
+    },
   },
 };
 </script>
 
 <style scoped>
 #MonthlyTodoListItem {
-  background-color: lightgray;
+  color:  #fff;
+  background-color: #007bff;
+  border: #007bff 1px solid;
+  padding: 1px;
   margin-top: 3px;
+  font-size: 10px;
 }
 </style>
