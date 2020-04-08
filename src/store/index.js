@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    token: null,
     reviews: [
       {
         userId: 0,
@@ -67,8 +69,15 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setToken(state, token) {
+      state.token = token;
+    },
   },
   actions: {
+    registerToken({ commit }, token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      commit('setToken', token);
+    },
   },
   modules: {
   },

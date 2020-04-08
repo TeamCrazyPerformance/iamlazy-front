@@ -49,6 +49,9 @@ export default {
       this.$router.push({ name: 'Setting' });
     },
   },
+  beforeCreate() {
+    this.$store.dispatch('registerToken', this.$route.query.token);
+  },
 };
 </script>
 
