@@ -6,7 +6,7 @@
     {{ todo.todoContent }}
     <todo-modal
       v-if="showTodoModal"
-      :todo-idx="todoIdx"
+      :todo-idx="todo.todoIdx"
     />
   </div>
 </template>

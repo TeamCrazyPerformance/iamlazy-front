@@ -11,7 +11,7 @@
       </span>
       <review-modal
         v-if="showReviewModal"
-        :reivew-date="review.reivewDate"
+        :review-date="review.reviewDate"
       />
       <div id="todoList">
         <MonthlyTodoListItem
