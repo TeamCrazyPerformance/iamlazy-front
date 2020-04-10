@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    userId: null,
     token: null,
     reviews: [
       {
@@ -45,6 +46,8 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    userId: (state) => state.userId,
+    token: (state) => state.token,
     reviewByDate: (state) => (date) => state.reviews.find((review) => review.reviewDate === date)
     || {
       userId: null,
@@ -69,15 +72,15 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setUserId(state, id) {
+      state.userId = id;
+    },
     setToken(state, token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       state.token = token;
     },
   },
   actions: {
-    registerToken({ commit }, token) {
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      commit('setToken', token);
-    },
   },
   modules: {
   },
