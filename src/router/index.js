@@ -4,12 +4,15 @@ import store from '../store';
 import Login from '../views/Login.vue';
 import Calendar from '../views/Calendar.vue';
 import Setting from '../views/Setting.vue';
-import WeeklyCalendar from '../components/weeklyCalendar/WeeklyCalendar.vue';
-import Monthlyalendar from '../components/monthlyCalendar/MonthlyCalendar.vue';
 
 Vue.use(VueRouter);
 
+function registerToken(token) {
+  store.dispatch('registerToken', token);
+}
+
 function checkToken(to, from, next) {
+  registerToken(to.query.token);
   if (store.getters.token) next();
   else next('/');
 }
@@ -25,18 +28,6 @@ const routes = [
     name: 'Calendar',
     component: Calendar,
     beforeEnter: checkToken,
-    children: [
-      {
-        path: 'weekly',
-        name: 'Weekly',
-        component: WeeklyCalendar,
-      },
-      {
-        path: 'monthly',
-        name: 'Monthly',
-        component: Monthlyalendar,
-      },
-    ],
   },
   {
     path: '/setting',
