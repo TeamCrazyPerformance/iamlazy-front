@@ -12,7 +12,7 @@ function registerToken(token) {
 }
 
 function checkToken(to, from, next) {
-  registerToken(to.query.token);
+  if (to.query.token) registerToken(to.query.token);
   if (store.getters.token) next();
   else next('/');
 }
