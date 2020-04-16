@@ -8,11 +8,11 @@ import Setting from '../views/Setting.vue';
 Vue.use(VueRouter);
 
 function registerToken(token) {
-  store.dispatch('registerToken', token);
+  if (token) store.dispatch('registerToken', token);
 }
 
 function checkToken(to, from, next) {
-  if (to.query.token) registerToken(to.query.token);
+  registerToken(to.query.token);
   if (store.getters.token) next();
   else next('/');
 }
