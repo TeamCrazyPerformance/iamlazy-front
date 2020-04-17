@@ -1,12 +1,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '../store';
 import Login from '../views/Login.vue';
 import Calendar from '../views/Calendar.vue';
 import Setting from '../views/Setting.vue';
-import WeeklyCalendar from '../components/weeklyCalendar/WeeklyCalendar.vue';
-import Monthlyalendar from '../components/monthlyCalendar/MonthlyCalendar.vue';
 
 Vue.use(VueRouter);
+
+function registerToken(token) {
+  alert(token);
+  if (token) store.dispatch('registerToken', token);
+}
+
+function checkToken(to, from, next) {
+  registerToken(to.query.token);
+  if (store.getters.token) next();
+  else next('/');
+}
 
 const routes = [
   {
@@ -18,23 +28,13 @@ const routes = [
     path: '/calendar',
     name: 'Calendar',
     component: Calendar,
-    children: [
-      {
-        path: 'weekly',
-        name: 'Weekly',
-        component: WeeklyCalendar,
-      },
-      {
-        path: 'monthly',
-        name: 'Monthly',
-        component: Monthlyalendar,
-      },
-    ],
+    beforeEnter: checkToken,
   },
   {
     path: '/setting',
     name: 'Setting',
     component: Setting,
+    beforeEnter: checkToken,
   },
 ];
 

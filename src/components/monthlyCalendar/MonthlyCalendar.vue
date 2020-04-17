@@ -1,7 +1,7 @@
 <template>
   <div id="monthlyCalendar">
     <p id="month">
-      {{ month }}
+      {{ month }} 월
     </p>
     <table id="monthlyCalendarTable">
       <tr>
@@ -13,14 +13,14 @@
         </td>
       </tr>
       <tr
-        v-for="(datesInWeek,idx) in datesInWeeks"
+        v-for="(datesInWeek,idx) in datesInMonth"
         :key="idx"
       >
         <td
-          v-for="(dateInWeek,idx2) in datesInWeek"
+          v-for="(date,idx2) in datesInWeek"
           :key="idx2"
         >
-          <monthly-date-list-item :date-list-item-date="dateInWeek" />
+          <monthly-date-list-item :date-list-item-date="date" />
         </td>
       </tr>
     </table>
@@ -32,6 +32,12 @@ import MonthlyDateListItem from './MonthlyDateListItem.vue';
 
 export default {
   name: 'MonthlyCalendar',
+  props: {
+    datesInMonth: {
+      type: Array,
+      default: null,
+    },
+  },
   components: {
     MonthlyDateListItem,
   },
@@ -42,17 +48,7 @@ export default {
   },
   computed: {
     month() {
-      const today = new Date();
-      return `${today.getMonth() + 1} 월`;
-    },
-    datesInWeeks() {
-      const today = new Date();
-      const firstDateInMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-      firstDateInMonth.setDate(firstDateInMonth.getDate() - firstDateInMonth.getDay());
-      return [...Array(5).keys()].map((x) => [...Array(7).keys()].map((y) => new Date(
-        firstDateInMonth.getFullYear(), firstDateInMonth.getMonth(),
-        firstDateInMonth.getDate() + y + 7 * x,
-      )));
+      return new Date().getMonth() + 1;
     },
   },
 };

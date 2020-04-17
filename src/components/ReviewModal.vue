@@ -30,7 +30,7 @@ export default {
   name: 'ReviewModal',
   props: {
     reviewDate: {
-      type: String,
+      type: Date,
       default: null,
     },
   },
@@ -43,7 +43,6 @@ export default {
         { text: ':0', value: 2 },
         { text: ':|', value: 3 }],
       autoReviewOptions: ['직접입력', '알찬하루', '게을렀다'],
-      review: null,
     };
   },
   methods: {
@@ -51,8 +50,10 @@ export default {
       alert(JSON.stringify(this.review));
     },
   },
-  created() {
-    this.review = { ...this.$store.getters.reviewByDate(this.reviewDate) };
+  computed: {
+    review() {
+      return this.$store.getters.reviewByDate(this.reviewDate);
+    },
   },
 };
 </script>

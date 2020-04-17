@@ -3,7 +3,7 @@
     <div
       @click="showTodoList = !showTodoList"
     >
-      <h4>{{ dateString }}</h4>
+      <h4>{{ formatedDate }}</h4>
       <span
         id="review"
         @click.stop="showReviewModal = !showReviewModal"
@@ -13,7 +13,7 @@
       </span>
       <review-modal
         v-if="showReviewModal"
-        :review-date="review.reviewDate"
+        :review-date="dateListItemDate"
       />
     </div>
     <div
@@ -43,7 +43,7 @@ export default {
   props: {
     dateListItemDate: {
       type: Date,
-      default: new Date(),
+      default: null,
     },
   },
   data() {
@@ -53,14 +53,14 @@ export default {
     };
   },
   computed: {
-    dateString() {
+    formatedDate() {
       return this.dateListItemDate.toISOString().split('T')[0];
     },
     review() {
-      return this.$store.getters.reviewByDate(this.dateString);
+      return this.$store.getters.reviewByDate(this.dateListItemDate);
     },
     todos() {
-      return this.$store.getters.todosByDate(this.dateString);
+      return this.$store.getters.todosByDate(this.dateListItemDate);
     },
   },
 };
