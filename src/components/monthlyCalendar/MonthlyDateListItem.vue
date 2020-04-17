@@ -11,7 +11,7 @@
       </span>
       <review-modal
         v-if="showReviewModal"
-        :review-date="review.reviewDate"
+        :review-date="dateListItemDate"
       />
       <div id="todoList">
         <MonthlyTodoListItem
@@ -33,7 +33,7 @@ export default {
   props: {
     dateListItemDate: {
       type: Date,
-      default: new Date(),
+      default: null,
     },
   },
   data() {
@@ -50,17 +50,13 @@ export default {
       return this.dateListItemDate.getDate();
     },
     active() {
-      const today = new Date();
-      return today.getMonth() === this.dateListItemDate.getMonth();
-    },
-    dateString() {
-      return this.dateListItemDate.toISOString().split('T')[0];
+      return new Date().getMonth() === this.dateListItemDate.getMonth();
     },
     review() {
-      return this.$store.getters.reviewByDate(this.dateString);
+      return this.$store.getters.reviewByDate(this.dateListItemDate);
     },
     todos() {
-      return this.$store.getters.todosByDate(this.dateString);
+      return this.$store.getters.todosByDate(this.dateListItemDate);
     },
   },
 };

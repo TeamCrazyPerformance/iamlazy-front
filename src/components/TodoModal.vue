@@ -64,7 +64,6 @@ export default {
         { text: '매일', value: 1 },
         { text: '매주', value: 2 },
         { text: '매월', value: 3 }],
-      todo: null,
     };
   },
   methods: {
@@ -72,8 +71,10 @@ export default {
       alert(JSON.stringify(this.todo));
     },
   },
-  created() {
-    this.todo = { ...this.$store.getters.todoByIdx(this.todoIdx) };
+  computed: {
+    todo() {
+      return this.$store.getters.todoByIdx(this.todoIdx);
+    },
   },
 };
 </script>
