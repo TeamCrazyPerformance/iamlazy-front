@@ -21,11 +21,9 @@
     </div>
     <monthly-calendar
       v-show="calendarType == 1"
-      :dates-in-month="datesInMonth"
     />
     <weekly-calendar
       v-show="calendarType == 0"
-      :dates-in-week="datesInWeek"
     />
   </div>
 </template>
