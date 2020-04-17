@@ -15,10 +15,14 @@ import WeeklyDateListItem from './WeeklyDateListItem.vue';
 
 export default {
   name: 'WeekCalendar',
-  props: {
-    datesInWeek: {
-      type: Array,
-      default: null,
+  computed: {
+    datesInWeek() {
+      const today = new Date();
+      const firstDateInWeek = new Date(
+        today.getFullYear(), today.getMonth(), today.getDate() - today.getDay(),
+      );
+      return [...Array(7).keys()].map((x) => new Date(firstDateInWeek.getFullYear(),
+        firstDateInWeek.getMonth(), firstDateInWeek.getDate() + x + 1));
     },
   },
   components: {

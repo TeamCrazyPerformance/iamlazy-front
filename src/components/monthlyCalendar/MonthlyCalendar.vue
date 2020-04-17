@@ -32,12 +32,6 @@ import MonthlyDateListItem from './MonthlyDateListItem.vue';
 
 export default {
   name: 'MonthlyCalendar',
-  props: {
-    datesInMonth: {
-      type: Array,
-      default: null,
-    },
-  },
   components: {
     MonthlyDateListItem,
   },
@@ -49,6 +43,15 @@ export default {
   computed: {
     month() {
       return new Date().getMonth() + 1;
+    },
+    datesInMonth() {
+      const today = new Date();
+      const firstDateInMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      firstDateInMonth.setDate(firstDateInMonth.getDate() - firstDateInMonth.getDay());
+      return [...Array(5).keys()].map((x) => [...Array(7).keys()].map((y) => new Date(
+        firstDateInMonth.getFullYear(), firstDateInMonth.getMonth(),
+        firstDateInMonth.getDate() + y + 7 * x,
+      )));
     },
   },
 };
