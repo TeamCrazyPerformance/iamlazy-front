@@ -7,7 +7,7 @@
     >
       <span
         id="todoContent"
-        @click.prevent="showTodoModal=!showTodoModal"
+        @click.stop="showTodoModal = true"
       >
         {{ todo.todoContent }}
       </span>
@@ -15,6 +15,7 @@
     <todo-modal
       v-if="showTodoModal"
       :todo-idx="todo.todoIdx"
+      @close="showTodoModal = false"
     />
   </div>
 </template>

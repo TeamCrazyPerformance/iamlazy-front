@@ -1,12 +1,13 @@
 <template>
   <div
     id="MonthlyTodoListItem"
-    @click="showTodoModal=!showTodoModal"
+    @click="showTodoModal = true"
   >
     {{ todo.todoContent }}
     <todo-modal
       v-if="showTodoModal"
       :todo-idx="todo.todoIdx"
+      @close="showTodoModal = false"
     />
   </div>
 </template>
