@@ -45,6 +45,9 @@ export default new Vuex.Store({
     setTodos(state, todos) {
       state.todos.push(...todos);
     },
+    deleteTodoByIdx(state, todoIdx) {
+      state.todos.splice(state.todos.findIndex((todo) => todo.todoIdx === todoIdx, 1));
+    },
   },
   actions: {
     registerToken({ commit }, token) {
@@ -55,6 +58,12 @@ export default new Vuex.Store({
       axios.get(`${apiUrl}/todos?date=${date.toISOString().split('T')[0]}`)
         .then((res) => {
           commit('setTodos', res.data);
+        });
+    },
+    deleteTodoByIdx({ commit }, todoIdx) {
+      axios.delete(`${apiUrl}/todos/${todoIdx}`)
+        .then(() => {
+          commit('deleteTodoByIdx', todoIdx);
         });
     },
   },

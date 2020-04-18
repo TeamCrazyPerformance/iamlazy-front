@@ -62,7 +62,7 @@
 
         <div class="modal-footer">
           <b-button
-            @click="onDelete"
+            @click.stop="onDelete"
           >
             삭제
           </b-button>
@@ -118,7 +118,7 @@ export default {
       this.onClose();
     },
     onDelete() {
-      alert(JSON.stringify(this.todo.todoIdx));
+      this.$store.dispatch('deleteTodoByIdx', this.todoIdx);
       this.onClose();
     },
   },
