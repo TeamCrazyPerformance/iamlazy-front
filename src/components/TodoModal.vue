@@ -14,46 +14,46 @@
         <div class="modal-body">
           <b-form-input
             id="todoTitle"
-            v-model="todo.todoTitle"
+            v-model="todoForm.todoTitle"
             type="text"
             placeholder="title"
           />
           <b-form-select
             id="repeatableUnit"
-            v-model="todo.repeatUnit"
+            v-model="todoForm.repeatUnit"
             :options="repeatUnitOptions"
           />
           <div
-            v-show="todo.repeatUnit==1"
+            v-show="todoForm.repeatUnit==1"
           >
             <b-form-datepicker
-              v-model="todo.startDate"
+              v-model="todoForm.startDate"
               class="mb-2"
             />
             <b-form-datepicker
-              v-model="todo.endDate"
+              v-model="todoForm.endDate"
               class="mb-2"
             />
           </div>
           <b-form-select
-            v-show="todo.repeatUnit==7"
-            v-model="todo.weekday"
+            v-show="todoForm.repeatUnit==7"
+            v-model="todoForm.weekday"
             :options="weekdayOptions"
           />
           <b-form-select
-            v-show="todo.repeatUnit==30"
-            v-model="todo.monthday"
+            v-show="todoForm.repeatUnit==30"
+            v-model="todoForm.monthday"
             :options="monthdayOptions"
           />
           <b-form-checkbox
             id="finish"
-            v-model="todo.finish"
+            v-model="todoForm.finish"
           >
             완료하였습니다!
           </b-form-checkbox>
           <b-form-textarea
             id="todoContent"
-            v-model="todo.todoContent"
+            v-model="todoForm.todoContent"
             placeholder="content"
             rows="3"
             max-rows="6"
@@ -88,6 +88,19 @@ export default {
   },
   data() {
     return {
+      todoForm: {
+        userId: null,
+        todoIdx: null,
+        todoTitle: null,
+        todoContent: null,
+        todoDate: null,
+        repeatUnit: null,
+        startDate: null,
+        endDate: null,
+        weekDay: null,
+        monthDay: null,
+        finish: null,
+      },
       showTodoModal: true,
       repeatUnitOptions: [
         { text: '반복없음', value: 0 },
@@ -114,7 +127,7 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      this.$store.dispatch('updateTodo', this.todo);
+      this.$store.dispatch('updateTodo', this.todoForm);
       this.onClose();
     },
     onDelete() {
@@ -122,10 +135,8 @@ export default {
       this.onClose();
     },
   },
-  computed: {
-    todo() {
-      return this.$store.getters.todoByIdx(this.todoIdx);
-    },
+  created() {
+    this.todoForm = { ...this.$store.getters.todoByIdx(this.todoIdx) };
   },
 };
 </script>
