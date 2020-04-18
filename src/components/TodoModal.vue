@@ -114,6 +114,7 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
+      this.$store.dispatch('updateTodo', this.todo);
       this.onClose();
     },
     onDelete() {
