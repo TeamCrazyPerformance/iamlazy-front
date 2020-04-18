@@ -93,7 +93,8 @@ export default {
         todoTitle: null,
         todoContent: null,
         todoDate: new Date(),
-        repeatUnit: 0,
+        repeatUnit: 1,
+        repeatableYN: true,
         startDate: new Date(),
         endDate: new Date(),
         weekDay: '0',
@@ -125,7 +126,7 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      alert(JSON.stringify(this.todoForm));
+      this.$store.dispatch('addTodo', this.todoForm);
       this.onClose();
     },
   },

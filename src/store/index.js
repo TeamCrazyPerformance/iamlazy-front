@@ -38,6 +38,9 @@ export default new Vuex.Store({
     updateTodo(state, newTodo) {
       state.todos[state.todos.findIndex((todo) => todo.todoIdx === newTodo.todoIdx)] = newTodo;
     },
+    addTodo(state, todo) {
+      state.todos.push(todo);
+    },
   },
   actions: {
     setToken({ commit }, token) {
@@ -60,6 +63,14 @@ export default new Vuex.Store({
       axios.put(`${apiUrl}/todos/${todo.todoIdx}`, todo)
         .then(() => {
           commit('updateTodo', todo);
+        });
+    },
+    addTodo({ commit }, todo) {
+      axios.post((`${apiUrl}/todos/${todo.todoIdx}`, todo))
+        .then((res) => {
+          const tmp = { ...todo };
+          tmp.todoIdx = res.data.todoIdx;
+          commit('addTodo', tmp);
         });
     },
   },
