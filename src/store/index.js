@@ -3,10 +3,11 @@ import Vuex from 'vuex';
 import axios from 'axios';
 
 Vue.use(Vuex);
+const apiUrl = 'http://121.130.167.189:8092';
 
 export default new Vuex.Store({
   state: {
-    token: 'asd',
+    token: null,
     reviews: [],
     todos: [],
     defaultReview: {
@@ -41,11 +42,20 @@ export default new Vuex.Store({
     setToken(state, token) {
       state.token = token;
     },
+    setTodos(state, todos) {
+      state.todos.push(...todos);
+    },
   },
   actions: {
     registerToken({ commit }, token) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       commit('setToken', token);
+    },
+    fetchTodosByDate({ commit }, date) {
+      axios.get(`${apiUrl}/todos?date=${date.toISOString().split('T')[0]}`)
+        .then((res) => {
+          commit('setTodos', res.data);
+        });
     },
   },
   modules: {
