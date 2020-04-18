@@ -114,11 +114,10 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      alert(JSON.stringify(this.todo));
       this.onClose();
     },
     onDelete() {
-      this.$store.dispatch('deleteTodoByIdx', this.todoIdx);
+      this.$store.dispatch('deleteTodo', this.todoIdx);
       this.onClose();
     },
   },

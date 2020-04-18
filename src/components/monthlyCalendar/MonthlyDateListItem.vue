@@ -60,7 +60,7 @@ export default {
     },
   },
   created() {
-    if (this.active) this.$store.dispatch('fetchTodosByDate', this.dateListItemDate);
+    if (this.active) this.$store.dispatch('fetchTodos', this.dateListItemDate);
   },
 };
 </script>

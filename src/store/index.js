@@ -42,28 +42,28 @@ export default new Vuex.Store({
     setToken(state, token) {
       state.token = token;
     },
-    setTodos(state, todos) {
+    fetchTodos(state, todos) {
       state.todos.push(...todos);
     },
-    deleteTodoByIdx(state, todoIdx) {
+    deleteTodo(state, todoIdx) {
       state.todos.splice(state.todos.findIndex((todo) => todo.todoIdx === todoIdx, 1));
     },
   },
   actions: {
-    registerToken({ commit }, token) {
+    setToken({ commit }, token) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       commit('setToken', token);
     },
-    fetchTodosByDate({ commit }, date) {
+    fetchTodos({ commit }, date) {
       axios.get(`${apiUrl}/todos?date=${date.toISOString().split('T')[0]}`)
         .then((res) => {
-          commit('setTodos', res.data);
+          commit('fetchTodos', res.data);
         });
     },
-    deleteTodoByIdx({ commit }, todoIdx) {
+    deleteTodo({ commit }, todoIdx) {
       axios.delete(`${apiUrl}/todos/${todoIdx}`)
         .then(() => {
-          commit('deleteTodoByIdx', todoIdx);
+          commit('deleteTodo', todoIdx);
         });
     },
   },
