@@ -16,19 +16,6 @@ export default new Vuex.Store({
       reviewContent: null,
       emoticon: null,
     },
-    defaultTodo: {
-      userId: null,
-      todoIdx: null,
-      todoTitle: null,
-      todoContent: null,
-      todoDate: null,
-      repeatUnit: null,
-      startDate: null,
-      endDate: null,
-      weekDay: null,
-      monthDay: null,
-      finish: null,
-    },
   },
   getters: {
     token: (state) => state.token,
@@ -36,7 +23,7 @@ export default new Vuex.Store({
     || state.defaultReview,
     todosByDate: (state) => (date) => state.todos.filter((todo) => todo.todoDate.split('T')[0] === date.toISOString().split('T')[0]),
     todoByIdx: (state) => (idx) => state.todos.find((todo) => todo.todoIdx === idx)
-    || state.defaultTodo,
+    || null,
   },
   mutations: {
     setToken(state, token) {
