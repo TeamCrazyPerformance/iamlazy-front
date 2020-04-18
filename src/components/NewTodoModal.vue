@@ -5,13 +5,17 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <h5>오늘의 할일</h5>
+          <h5>새로운 할일</h5>
           <b-button-close
             @click.stop="onClose"
           />
         </div>
 
         <div class="modal-body">
+          <b-form-datepicker
+            v-model="todoForm.todoDate"
+            class="mb-2"
+          />
           <b-form-input
             id="todoTitle"
             v-model="todoForm.todoTitle"
@@ -62,14 +66,9 @@
 
         <div class="modal-footer">
           <b-button
-            @click.stop="onDelete"
-          >
-            삭제
-          </b-button>
-          <b-button
             @click.stop="onSubmit"
           >
-            수정
+            확인
           </b-button>
         </div>
       </div>
@@ -79,7 +78,7 @@
 
 <script>
 export default {
-  name: 'TodoModal',
+  name: 'NewTodoModal',
   props: {
     todoIdx: {
       type: Number,
@@ -93,13 +92,13 @@ export default {
         todoIdx: null,
         todoTitle: null,
         todoContent: null,
-        todoDate: null,
-        repeatUnit: null,
-        startDate: null,
-        endDate: null,
-        weekDay: null,
-        monthDay: null,
-        finish: null,
+        todoDate: new Date(),
+        repeatUnit: 0,
+        startDate: new Date(),
+        endDate: new Date(),
+        weekDay: '0',
+        monthDay: 0,
+        finish: false,
       },
       repeatUnitOptions: [
         { text: '반복없음', value: 0 },
@@ -107,7 +106,7 @@ export default {
         { text: '매주', value: 7 },
         { text: '매월', value: 30 }],
       weekdayOptions: [
-        { text: '반복요일을 설정해주세요', value: null },
+        { text: '반복요일을 설정해주세요', value: '0' },
         { text: '월요일', value: '1' },
         { text: '화요일', value: '2' },
         { text: '수요일', value: '3' },
@@ -117,7 +116,7 @@ export default {
         { text: '일요일', value: '7' },
       ],
       monthdayOptions: [
-        { text: '반복일을 설정해주세요', value: null },
+        { text: '반복일을 설정해주세요', value: 0 },
         ...[...Array(30).keys()].map((num) => num + 1)],
     };
   },
@@ -126,16 +125,9 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      this.$store.dispatch('updateTodo', this.todoForm);
+      alert(JSON.stringify(this.todoForm));
       this.onClose();
     },
-    onDelete() {
-      this.$store.dispatch('deleteTodo', this.todoIdx);
-      this.onClose();
-    },
-  },
-  created() {
-    this.todoForm = { ...this.$store.getters.todoByIdx(this.todoIdx) };
   },
 };
 </script>

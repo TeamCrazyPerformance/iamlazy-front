@@ -9,7 +9,7 @@
         id="todoContent"
         @click.stop="showTodoModal = true"
       >
-        {{ todo.todoContent }}
+        {{ todo.todoTitle }}
       </span>
     </b-form-checkbox>
     <todo-modal

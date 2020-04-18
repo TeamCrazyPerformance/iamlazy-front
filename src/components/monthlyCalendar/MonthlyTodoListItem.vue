@@ -3,7 +3,7 @@
     id="MonthlyTodoListItem"
     @click="showTodoModal = true"
   >
-    {{ todo.todoContent }}
+    {{ todo.todoTitle }}
     <todo-modal
       v-if="showTodoModal"
       :todo-idx="todo.todoIdx"
