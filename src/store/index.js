@@ -22,8 +22,7 @@ export default new Vuex.Store({
     reviewByDate: (state) => (date) => state.reviews.find((review) => review.reviewDate.split('T')[0] === date.toISOString().split('T')[0])
     || state.defaultReview,
     todosByDate: (state) => (date) => state.todos.filter((todo) => todo.todoDate.split('T')[0] === date.toISOString().split('T')[0]),
-    todoByIdx: (state) => (idx) => state.todos.find((todo) => todo.todoIdx === idx)
-    || null,
+    todoByIdx: (state) => (idx) => state.todos.find((todo) => todo.todoIdx === idx),
   },
   mutations: {
     setToken(state, token) {
@@ -55,10 +54,8 @@ export default new Vuex.Store({
         });
     },
     deleteTodo({ commit }, todoIdx) {
-      axios.delete(`${apiUrl}/todos/${todoIdx}`)
-        .then(() => {
-          commit('deleteTodo', todoIdx);
-        });
+      commit('deleteTodo', todoIdx);
+      axios.delete(`${apiUrl}/todos/${todoIdx}`);
     },
     updateTodo({ commit }, todo) {
       commit('updateTodo', todo);
