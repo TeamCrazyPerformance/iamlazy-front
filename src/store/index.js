@@ -36,7 +36,8 @@ export default new Vuex.Store({
       state.todos.splice(state.todos.findIndex((todo) => todo.todoIdx === todoIdx), 1);
     },
     updateTodo(state, newTodo) {
-      state.todos[state.todos.findIndex((todo) => todo.todoIdx === newTodo.todoIdx)] = newTodo;
+      const oldTodo = state.todos.find((todo) => todo.todoIdx === newTodo.todoIdx);
+      Object.keys(oldTodo).forEach((key) => { oldTodo[key] = newTodo[key]; });
     },
     addTodo(state, todo) {
       state.todos.push(todo);
@@ -60,10 +61,8 @@ export default new Vuex.Store({
         });
     },
     updateTodo({ commit }, todo) {
-      axios.put(`${apiUrl}/todos/${todo.todoIdx}`, todo)
-        .then(() => {
-          commit('updateTodo', todo);
-        });
+      commit('updateTodo', todo);
+      axios.put(`${apiUrl}/todos/${todo.todoIdx}`, todo);
     },
     addTodo({ commit }, todo) {
       axios.post((`${apiUrl}/todos/${todo.todoIdx}`, todo))
