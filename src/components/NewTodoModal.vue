@@ -88,13 +88,11 @@ export default {
   data() {
     return {
       todoForm: {
-        userId: null,
         todoIdx: null,
         todoTitle: null,
         todoContent: null,
         todoDate: new Date(),
-        repeatUnit: 1,
-        repeatableYN: true,
+        repeatUnit: 0,
         startDate: new Date(),
         endDate: new Date(),
         weekDay: null,
