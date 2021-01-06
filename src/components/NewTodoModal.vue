@@ -5,13 +5,17 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <h5>오늘의 할일</h5>
+          <h5>새로운 할일</h5>
           <b-button-close
             @click.stop="onClose"
           />
         </div>
 
         <div class="modal-body">
+          <b-form-datepicker
+            v-model="todoForm.todoDate"
+            class="mb-2"
+          />
           <b-form-input
             id="todoTitle"
             v-model="todoForm.todoTitle"
@@ -62,14 +66,9 @@
 
         <div class="modal-footer">
           <b-button
-            @click.stop="onDelete"
-          >
-            삭제
-          </b-button>
-          <b-button
             @click.stop="onSubmit"
           >
-            수정
+            확인
           </b-button>
         </div>
       </div>
@@ -79,7 +78,7 @@
 
 <script>
 export default {
-  name: 'TodoModal',
+  name: 'NewTodoModal',
   props: {
     todoIdx: {
       type: Number,
@@ -92,13 +91,13 @@ export default {
         todoIdx: null,
         todoTitle: null,
         todoContent: null,
-        todoDate: null,
+        todoDate: new Date(),
         repeatUnit: 0,
-        startDate: null,
-        endDate: null,
+        startDate: new Date(),
+        endDate: new Date(),
         weekDay: null,
         monthDay: null,
-        finish: null,
+        finish: false,
       },
       repeatUnitOptions: [
         { text: '반복없음', value: 0 },
@@ -125,16 +124,9 @@ export default {
       this.$emit('close');
     },
     onSubmit() {
-      this.$store.dispatch('updateTodo', this.todoForm);
+      this.$store.dispatch('addTodo', this.todoForm);
       this.onClose();
     },
-    onDelete() {
-      this.$store.dispatch('deleteTodo', this.todoIdx);
-      this.onClose();
-    },
-  },
-  created() {
-    this.todoForm = { ...this.$store.getters.todoByIdx(this.todoIdx) };
   },
 };
 </script>

@@ -21,11 +21,9 @@
     </div>
     <monthly-calendar
       v-show="calendarType == 1"
-      :dates-in-month="datesInMonth"
     />
     <weekly-calendar
       v-show="calendarType == 0"
-      :dates-in-week="datesInWeek"
     />
   </div>
 </template>
@@ -48,25 +46,6 @@ export default {
       ],
       calendarType: 0,
     };
-  },
-  computed: {
-    datesInMonth() {
-      const today = new Date();
-      const firstDateInMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-      firstDateInMonth.setDate(firstDateInMonth.getDate() - firstDateInMonth.getDay());
-      return [...Array(5).keys()].map((x) => [...Array(7).keys()].map((y) => new Date(
-        firstDateInMonth.getFullYear(), firstDateInMonth.getMonth(),
-        firstDateInMonth.getDate() + y + 7 * x,
-      )));
-    },
-    datesInWeek() {
-      const today = new Date();
-      const firstDateInWeek = new Date(
-        today.getFullYear(), today.getMonth(), today.getDate() - today.getDay(),
-      );
-      return [...Array(7).keys()].map((x) => new Date(firstDateInWeek.getFullYear(),
-        firstDateInWeek.getMonth(), firstDateInWeek.getDate() + x + 1));
-    },
   },
   methods: {
     goSetting() {

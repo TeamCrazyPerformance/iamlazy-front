@@ -59,6 +59,9 @@ export default {
       return this.$store.getters.todosByDate(this.dateListItemDate);
     },
   },
+  created() {
+    if (this.active) this.$store.dispatch('fetchTodos', this.dateListItemDate);
+  },
 };
 </script>
 

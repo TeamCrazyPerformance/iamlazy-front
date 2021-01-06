@@ -7,14 +7,15 @@
     >
       <span
         id="todoContent"
-        @click.prevent="showTodoModal=!showTodoModal"
+        @click.stop="showTodoModal = true"
       >
-        {{ todo.todoContent }}
+        {{ todo.todoTitle }}
       </span>
     </b-form-checkbox>
     <todo-modal
       v-if="showTodoModal"
       :todo-idx="todo.todoIdx"
+      @close="showTodoModal = false"
     />
   </div>
 </template>
